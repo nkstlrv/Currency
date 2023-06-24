@@ -9,6 +9,9 @@ class Rate(models.Model):
     currency = models.CharField(max_length=3, unique=True, blank=False, null=False)
     source = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
 
 
 class ContuctUs(models.Model):
@@ -16,5 +19,8 @@ class ContuctUs(models.Model):
     email_from = models.EmailField(blank=False, null=False)
     subject = models.CharField(max_length=255, blank=False, null=False)
     message = models.TextField(max_length=2500)
+    
+    def __str__(self):
+        return f"{self.subject} | {self.message} | by {self.email_from}"
 
 
