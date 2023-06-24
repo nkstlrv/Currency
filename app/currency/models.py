@@ -12,7 +12,7 @@ class Rate(models.Model):
 
 
 class ContuctUs(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     email_from = models.EmailField(blank=False, null=False)
     subject = models.CharField(max_length=255, blank=False, null=False)
     message = models.TextField(max_length=2500)
