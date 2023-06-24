@@ -1,6 +1,7 @@
 from django.urls import path
-from currency.views import home_view
+from currency import views
 
 urlpatterns = [
-    path('', home_view),
+    path('', views.home_view),
+    path('contactus/list/', views.contactus_list),
 ]

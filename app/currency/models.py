@@ -14,11 +14,11 @@ class Rate(models.Model):
         return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
 
 
-class ContuctUs(models.Model):
+class ContactUs(models.Model):
     # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     email_from = models.EmailField(blank=False, null=False)
     subject = models.CharField(max_length=255, blank=False, null=False)
-    message = models.TextField(max_length=2500)
+    message = models.CharField(max_length=2500)
     
     def __str__(self):
         return f"{self.subject} | {self.message} | by {self.email_from}"
