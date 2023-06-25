@@ -8,3 +8,5 @@ db.sqlite3
 ../.idea/
 idea
 .idea
+currency_db.session.sql
+.vscode
