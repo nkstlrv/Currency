@@ -27,6 +27,6 @@ def contacts_json(request):
 def contacts_table(request):
     contacts = models.ContactUs.objects.all()
 
-    context = {'contucts': contacts}
+    context = {'contacts': contacts}
 
-    return render(request, 'currency/contacts.html',context)
+    return render(request, 'currency/contacts.html', context)
