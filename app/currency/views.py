@@ -8,7 +8,7 @@ def home_view(request):
     return render(request, 'currency/index.html')
 
 
-def contactus_list(request):
+def contacts_json(request):
     data = {}
 
     contacts = models.ContactUs.objects.all()
@@ -22,3 +22,11 @@ def contactus_list(request):
             }
 
     return JsonResponse(data)
+
+
+def contacts_table(request):
+    contacts = models.ContactUs.objects.all()
+
+    context = {'contucts': contacts}
+
+    return render(request, 'currency/contacts.html',context)
