@@ -1,11 +1,11 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from currency import models
 # import json
 
 
 def home_view(request):
-    return HttpResponse("<h1>Hello, World!</h1>")
+    return render(request, 'currency/index.html')
 
 
 def contactus_list(request):
