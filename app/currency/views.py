@@ -11,7 +11,7 @@ def home_view(request):
 def contacts_json(request):
     data = {}
 
-    contacts = models.ContactUs.objects.all()
+    contacts = models.Contacts.objects.all()
     if contacts:
         for ind, contact in enumerate(contacts, start=1):
             data[ind] = {
@@ -25,7 +25,7 @@ def contacts_json(request):
 
 
 def contacts_table(request):
-    contacts = models.ContactUs.objects.all()
+    contacts = models.Contacts.objects.all()
 
     context = {'contacts': contacts}
 
