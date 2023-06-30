@@ -15,7 +15,7 @@ class Rates(models.Model):
         return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
 
 
-class ContactUs(models.Model):
+class Contacts(models.Model):
     # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     email_from = models.EmailField()
     subject = models.CharField(max_length=255)
