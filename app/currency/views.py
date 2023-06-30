@@ -30,3 +30,28 @@ def contacts_table(request):
     context = {'contacts': contacts}
 
     return render(request, 'currency/contacts.html', context)
+
+
+def rates_json(request):
+    data = {}
+
+    rates = models.Rate.objects.all()
+    if rates:
+        for ind, rate in enumerate(rates, start=1):
+            data[ind] = {
+                'id': rate.id,
+                'currency': rate.currency,
+                'buy': rate.buy,
+                'sell': rate.sell,
+                'source': rate.source,
+                'created': rate.created
+            }
+
+    return JsonResponse(data)
+
+def rates_table(request):
+    rates = models.Rate.objects.all()
+
+    context = {'rates': rates}
+
+    return render(request, 'currency/rates.html', context)
