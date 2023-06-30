@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator
 # from django.contrib.auth.models import User
 
 
-class Rate(models.Model):
+class Rates(models.Model):
     buy = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     sell = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     currency = models.CharField(max_length=4, unique=True)

@@ -35,7 +35,7 @@ def contacts_table(request):
 def rates_json(request):
     data = {}
 
-    rates = models.Rate.objects.all()
+    rates = models.Rates.objects.all()
     if rates:
         for ind, rate in enumerate(rates, start=1):
             data[ind] = {
@@ -50,7 +50,7 @@ def rates_json(request):
     return JsonResponse(data)
 
 def rates_table(request):
-    rates = models.Rate.objects.all()
+    rates = models.Rates.objects.all()
 
     context = {'rates': rates}
 
