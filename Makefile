@@ -9,4 +9,7 @@ makemigrations:
 
 shell:
 	python app/manage.py shell
+
+pep:
+	flake8 app/
 	

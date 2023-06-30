@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from currency import models
 # import json
 
@@ -48,6 +48,7 @@ def rates_json(request):
             }
 
     return JsonResponse(data)
+
 
 def rates_table(request):
     rates = models.Rates.objects.all()
