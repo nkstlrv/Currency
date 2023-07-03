@@ -56,3 +56,7 @@ def rates_table(request):
     context = {'rates': rates}
 
     return render(request, 'currency/rates.html', context)
+
+
+def create_contact(request):
+    pass
