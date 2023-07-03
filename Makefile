@@ -8,5 +8,8 @@ makemigrations:
 	python app/manage.py makemigrations
 
 shell:
-	python app/manage.py shell_plus --print-sql
+	python app/manage.py shell
+
+pep:
+	flake8 app/
 	

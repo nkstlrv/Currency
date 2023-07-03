@@ -1,0 +1,60 @@
+{%extends 'currency/base.html'%}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'currency/css/rates.css' %}">
+{% endblock%}
+
+{% block content %}
+
+<div class="header">
+    <h1>Rates Table</h1>
+</div>
+
+{% if rates|length > 0 %}
+
+<div class="table-div">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sell</th>
+                <th scope="col">Source</th>
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for rate in rates %}
+
+            <tr>
+                <th scope="row">{{rate.id}}</th>
+                <td>{{rate.currency}}</td>
+                <td>{{rate.buy}}</td>
+                <td>{{rate.sell}}</td>
+                <td>{{rate.source}}</td>
+                <td>{{rate.created}} UTC</td>
+                
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info" role="alert">
+    Table is empty
+</div>
+
+{% endif %}
+
+
+
+{%endblock content%}
