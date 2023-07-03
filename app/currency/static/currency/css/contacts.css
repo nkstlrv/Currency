@@ -11,3 +11,19 @@
     margin-top: 30px;
     text-align: center;
 }
+
+a { 
+    text-decoration: none;
+}
+
+.delete {
+    color: red;
+}
+
+body {
+    text-align: center;
+}
+
+#new-contact {
+    margin-top: 40px;
+}
