@@ -23,3 +23,11 @@ class Contacts(models.Model):
 
     def __str__(self):
         return f"{self.subject} | {self.message} | by {self.email_from}"
+
+
+class Source(models.Model):
+    name = models.CharField(max_length=64)
+    url = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.name} | {self.url}"
