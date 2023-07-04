@@ -15,4 +15,5 @@ urlpatterns = [
     path('rates/delete/<int:pk>/', views.rate_delete, name='rate_delete'),
     path('sources/table/', views.sources_table, name='sources_table'),
     path('sources/create/', views.source_create, name='source_create'),
+    path('sources/update/<int:pk>/', views.source_update, name='source_update'),
 ]

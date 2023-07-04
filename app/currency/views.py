@@ -168,3 +168,20 @@ def source_create(request):
         'form': form,
     }
     return render(request, 'currency/source_create.html', context)
+
+
+def source_update(request, pk):
+    source_to_update = get_object_or_404(models.Sources, id=pk)
+    if request.method == 'POST':
+        form = SourcesForm(request.POST, instance=source_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect('sources_table')
+    form = SourcesForm(instance=source_to_update)
+
+    context = {
+        'form': form,
+        'id': pk
+    }
+
+    return render(request, 'currency/source_update.html', context)

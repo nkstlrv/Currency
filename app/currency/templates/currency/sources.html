@@ -33,7 +33,7 @@
         <td>{{source.url}}</td>
         <td>
             <div>
-          <a class="edit" href="#">Edit</a>
+          <a class="edit" href="{% url 'source_update' source.id%}">Edit</a>
           <base>|</base>
           <a class="delete" href="#">Delete</a>
         </div>
