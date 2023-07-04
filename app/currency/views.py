@@ -90,6 +90,7 @@ def contact_update(request, pk):
 
     return render(request, 'currency/contact_update.html', context)
 
+
 def contact_delete(request, pk):
     contact_to_delete = get_object_or_404(models.Contacts, id=pk)
     if request.method == 'GET':
@@ -100,4 +101,3 @@ def contact_delete(request, pk):
     elif request.method == 'POST':
         contact_to_delete.delete()
         return redirect('contacts_table')
-
