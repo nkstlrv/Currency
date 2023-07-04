@@ -37,7 +37,7 @@
         {% endif %}
         <td>
             <div>
-          <a class="edit">Edit</a>
+          <a class="edit" href="{% url 'contact_update' contact.id%}">Edit</a>
           <base>|</base>
           <a class="delete">Delete</a>
         </div>
@@ -55,7 +55,7 @@
 
 {% endif %} 
 
-<a href="{% url 'create_contact' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
+<a href="{% url 'contact_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
     Create Contact
 </button></a>
 

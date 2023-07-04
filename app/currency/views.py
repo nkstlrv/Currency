@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm
 
@@ -58,7 +58,7 @@ def rates_table(request):
     return render(request, 'currency/rates.html', context)
 
 
-def create_contact(request):
+def contact_create(request):
     if request.method == 'POST':
         form = ContactsForm(request.POST)
 
@@ -70,6 +70,22 @@ def create_contact(request):
 
     context = {
         'form': form,
-        'data': 'test'
     }
     return render(request, 'currency/contact_create.html', context)
+
+
+def contact_update(request, pk):
+    contact_to_update = get_object_or_404(models.Contacts, id=pk)
+    if request.method == 'POST':
+        form = ContactsForm(request.POST, instance=contact_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect('contacts_table')
+    form = ContactsForm(instance=contact_to_update)
+
+    context = {
+        'form': form,
+        'id': pk
+    }
+
+    return render(request, 'currency/contact_update.html', context)
