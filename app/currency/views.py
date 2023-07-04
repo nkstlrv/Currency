@@ -124,7 +124,7 @@ def rate_update(request, pk):
         form = RatesForm(request.POST, instance=rate_to_update)
         if form.is_valid():
             form.save()
-            return redirect('contacts_table')
+            return redirect('rates_table')
     form = RatesForm(instance=rate_to_update)
 
     context = {
@@ -133,3 +133,16 @@ def rate_update(request, pk):
     }
 
     return render(request, 'currency/rate_update.html', context)
+
+
+def rate_delete(request, pk):
+    rate_to_delete = get_object_or_404(models.Rates, id=pk)
+    if request.method == 'GET':
+        context = {
+            'rate': rate_to_delete
+        }
+        return render(request, 'currency/rate_delete.html', context)
+    elif request.method == 'POST':
+        rate_to_delete.delete()
+        return redirect('rates_table')
+    

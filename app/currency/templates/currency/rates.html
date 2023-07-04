@@ -36,13 +36,17 @@
                 <td>{{rate.currency}}</td>
                 <td>{{rate.buy}}</td>
                 <td>{{rate.sell}}</td>
+                {% if rate.source %}
                 <td>{{rate.source}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
                 <td>{{rate.created}} UTC</td>
                 <td>
                     <div>
                   <a class="edit" href="{% url 'rate_update' rate.id %}">Edit</a>
                   <base>|</base>
-                  <a class="delete" href="#">Delete</a>
+                  <a class="delete" href="{% url 'rate_delete' rate.id %}">Delete</a>
                 </div>
                 </td>
                 
