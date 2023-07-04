@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from currency import models
-from currency.forms import ContactsForm, RatesForm
+from currency.forms import ContactsForm, RatesForm, SourcesForm
 
 
 def home_view(request):
@@ -145,4 +145,26 @@ def rate_delete(request, pk):
     elif request.method == 'POST':
         rate_to_delete.delete()
         return redirect('rates_table')
-    
+
+
+def sources_table(request):
+    sources = models.Sources.objects.all()
+
+    context = {'sources': sources}
+
+    return render(request, 'currency/sources.html', context)
+
+
+def source_create(request):
+    if request.method == 'POST':
+        form = SourcesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sources_table')
+
+    form = SourcesForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'currency/source_create.html', context)

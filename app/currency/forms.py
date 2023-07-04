@@ -1,5 +1,5 @@
 from django import forms
-from currency.models import Contacts, Rates, Source
+from currency.models import Contacts, Rates, Sources
 
 
 class ContactsForm(forms.ModelForm):
@@ -21,6 +21,7 @@ class ContactsForm(forms.ModelForm):
             'message': forms.Textarea(attrs={'placeholder': 'Enter your message'}),
         }
 
+
 class RatesForm(forms.ModelForm):
     class Meta:
         model = Rates
@@ -38,6 +39,23 @@ class RatesForm(forms.ModelForm):
         }
         widgets = {
             'currency': forms.TextInput(attrs={'placeholder': 'Enter currency shortcut (usd, uah, etc.)'}),
-        
+
             'source': forms.TextInput(attrs={'placeholder': 'Enter cuurency rate source'}),
+        }
+
+
+class SourcesForm(forms.ModelForm):
+    class Meta:
+        model = Sources
+        fields = (
+            'name',
+            'url'
+        )
+        labels = {
+            'name': 'Source Name',
+            'url': 'Source URL'
+        }
+        widgets = {
+            'email_from': forms.TextInput(attrs={'placeholder': 'Enter source name'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Enter source URL'})
         }
