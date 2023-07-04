@@ -39,7 +39,7 @@
             <div>
           <a class="edit" href="{% url 'contact_update' contact.id%}">Edit</a>
           <base>|</base>
-          <a class="delete">Delete</a>
+          <a class="delete" href="{% url 'contact_delete' contact.id%}">Delete</a>
         </div>
         </td>
       </tr>
