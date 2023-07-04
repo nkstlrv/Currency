@@ -40,7 +40,7 @@
                 <td>{{rate.created}} UTC</td>
                 <td>
                     <div>
-                  <a class="edit" href="#">Edit</a>
+                  <a class="edit" href="{% url 'rate_update' rate.id %}">Edit</a>
                   <base>|</base>
                   <a class="delete" href="#">Delete</a>
                 </div>
