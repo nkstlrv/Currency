@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from currency import models
-from currency.forms import ContactsForm
+from currency.forms import ContactsForm, RatesForm
 
 
 def home_view(request):
@@ -101,3 +101,18 @@ def contact_delete(request, pk):
     elif request.method == 'POST':
         contact_to_delete.delete()
         return redirect('contacts_table')
+
+
+def rate_create(request):
+    if request.method == 'POST':
+        form = RatesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('rates_table')
+
+    form = RatesForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'currency/rate_create.html', context)

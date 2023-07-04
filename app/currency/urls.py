@@ -10,4 +10,5 @@ urlpatterns = [
     path('contacts/create/', views.contact_create, name='contact_create'),
     path('contacts/update/<int:pk>/', views.contact_update, name='contact_update'),
     path('contacts/delete/<int:pk>/', views.contact_delete, name='contact_delete'),
+    path('rates/create/', views.rate_create, name='rate_create'),
 ]
