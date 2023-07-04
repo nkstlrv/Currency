@@ -1,8 +1,9 @@
-{%extends 'currency/base.html'%} 
-{% load static %} 
+{%extends 'currency/base.html'%}
+{% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'currency/css/contacts.css' %}" />
-{% endblock%} 
+<link rel="stylesheet" href="" />
+{% endblock%}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
@@ -11,5 +12,10 @@
   <h1>Create Contact</h1>
 </div>
 
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button type="submit">Submit</button>
+</form>
 
 {%endblock content%}

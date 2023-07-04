@@ -55,6 +55,8 @@
 
 {% endif %} 
 
-<button type="button" id="new-contact" class="btn btn-primary btn-lg">Create Contact</button>
+<a href="{% url 'create_contact' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
+    Create Contact
+</button></a>
 
 {%endblock content%}
