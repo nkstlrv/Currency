@@ -35,7 +35,7 @@
             <div>
           <a class="edit" href="{% url 'source_update' source.id%}">Edit</a>
           <base>|</base>
-          <a class="delete" href="#">Delete</a>
+          <a class="delete" href="{% url 'source_delete' source.id%}">Delete</a>
         </div>
         </td>
       </tr>

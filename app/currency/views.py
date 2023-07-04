@@ -185,3 +185,15 @@ def source_update(request, pk):
     }
 
     return render(request, 'currency/source_update.html', context)
+
+
+def source_delete(request, pk):
+    source_to_delete = get_object_or_404(models.Sources, id=pk)
+    if request.method == 'GET':
+        context = {
+            'source': source_to_delete
+        }
+        return render(request, 'currency/source_delete.html', context)
+    elif request.method == 'POST':
+        source_to_delete.delete()
+        return redirect('sources_table')
