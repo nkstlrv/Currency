@@ -24,7 +24,7 @@ class Contacts(models.Model):
         return f"{self.subject} | {self.message} | by {self.email_from}"
 
 
-class Source(models.Model):
+class Sources(models.Model):
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=255)
 
