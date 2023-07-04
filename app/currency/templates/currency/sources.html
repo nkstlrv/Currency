@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{% static 'currency/css/contacts.css' %}" />
 {% endblock%} 
 
+{%block title%}Sources Table{%endblock title%}
+
 {% block content %}
 
 <div class="header">
@@ -19,6 +21,7 @@
         <th scope="col">ID</th>
         <th scope="col">Source Name</th>
         <th scope="col">Source URL</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>

@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{% static 'currency/css/contacts.css' %}">
 {% endblock%}
 
+
+{%block title%}Rates Table{%endblock title%}
+
+
 {% block content %}
 
 <div class="header">
@@ -25,6 +29,7 @@
                 <th scope="col">Sell</th>
                 <th scope="col">Source</th>
                 <th scope="col">Created</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
