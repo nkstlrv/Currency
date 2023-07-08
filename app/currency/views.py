@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
 
@@ -56,22 +56,6 @@ class RateCreateView(CreateView):
     form_class = RatesForm
     template_name = 'currency/rate_create.html'
     success_url = reverse_lazy('rates_table')
-    
-    
-    
-def rate_create(request):
-    if request.method == 'POST':
-        form = RatesForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('rates_table')
-
-    form = RatesForm()
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'currency/rate_create.html', context)    
 
 
 class ContactsListView(ListView):
@@ -85,22 +69,14 @@ class ContactCreateView(CreateView):
     template_name = 'currency/contact_create.html'
     success_url = reverse_lazy('contacts_table')
     
+    
+class ContactUpdateView(UpdateView):
+    model = models.Contacts
+    form_class = ContactsForm
+    template_name = 'currency/contact_update.html'
+    success_url = reverse_lazy('contacts_table')
 
-def contact_update(request, pk):
-    contact_to_update = get_object_or_404(models.Contacts, id=pk)
-    if request.method == 'POST':
-        form = ContactsForm(request.POST, instance=contact_to_update)
-        if form.is_valid():
-            form.save()
-            return redirect('contacts_table')
-    form = ContactsForm(instance=contact_to_update)
 
-    context = {
-        'form': form,
-        'id': pk
-    }
-
-    return render(request, 'currency/contact_update.html', context)
 
 
 def contact_delete(request, pk):

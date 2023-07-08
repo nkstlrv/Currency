@@ -11,7 +11,7 @@ urlpatterns = [
     path('rates/table/', views.RatesListView.as_view(), name='rates_table'),
     
     path('contacts/create/', views.ContactCreateView.as_view(), name='contact_create'),
-    path('contacts/update/<int:pk>/', views.contact_update, name='contact_update'),
+    path('contacts/update/<int:pk>/', views.ContactUpdateView.as_view(), name='contact_update'),
     path('contacts/delete/<int:pk>/', views.contact_delete, name='contact_delete'),
     
     path('rates/create/', views.RateCreateView.as_view(), name='rate_create'),
