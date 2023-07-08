@@ -15,7 +15,7 @@ urlpatterns = [
     path('contacts/delete/<int:pk>/', views.ContactDeleteView.as_view(), name='contact_delete'),
     
     path('rates/create/', views.RateCreateView.as_view(), name='rate_create'),
-    path('rates/update/<int:pk>/', views.rate_update, name='rate_update'),
+    path('rates/update/<int:pk>/', views.RateUpdateView.as_view(), name='rate_update'),
     path('rates/delete/<int:pk>/', views.rate_delete, name='rate_delete'),
     
     path('sources/table/', views.sources_table, name='sources_table'),
