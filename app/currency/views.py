@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView
 
 
-def home_view(request):
-    return render(request, 'currency/index.html')
+class HomeTemplateView(TemplateView):
+    template_name = 'currency/index.html'
 
 
 def contacts_json(request):
