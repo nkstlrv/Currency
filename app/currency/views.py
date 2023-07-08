@@ -10,6 +10,24 @@ class HomeTemplateView(TemplateView):
     template_name = 'currency/index.html'
 
 
+def rates_json(request):
+    data = {}
+
+    rates = models.Rates.objects.all()
+    if rates:
+        for ind, rate in enumerate(rates, start=1):
+            data[ind] = {
+                'id': rate.id,
+                'currency': rate.currency,
+                'buy': rate.buy,
+                'sell': rate.sell,
+                'source': rate.source,
+                'created': rate.created
+            }
+
+    return JsonResponse(data)
+
+
 def contacts_json(request):
     data = {}
 
@@ -32,30 +50,10 @@ class ContactsListView(ListView):
     template_name = 'currency/contacts.html'
 
 
-def rates_json(request):
-    data = {}
-
-    rates = models.Rates.objects.all()
-    if rates:
-        for ind, rate in enumerate(rates, start=1):
-            data[ind] = {
-                'id': rate.id,
-                'currency': rate.currency,
-                'buy': rate.buy,
-                'sell': rate.sell,
-                'source': rate.source,
-                'created': rate.created
-            }
-
-    return JsonResponse(data)
-
-
-def rates_table(request):
-    rates = models.Rates.objects.all()
-
-    context = {'rates': rates}
-
-    return render(request, 'currency/rates.html', context)
+class RatesListView(ListView):
+    model = models.Rates
+    context_object_name = 'rates'
+    template_name = 'currency/rates.html'
 
 
 def contact_create(request):
