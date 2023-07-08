@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
@@ -77,20 +77,10 @@ class ContactUpdateView(UpdateView):
     success_url = reverse_lazy('contacts_table')
 
 
-
-
-def contact_delete(request, pk):
-    contact_to_delete = get_object_or_404(models.Contacts, id=pk)
-    if request.method == 'GET':
-        context = {
-            'contact': contact_to_delete
-        }
-        return render(request, 'currency/contact_delete.html', context)
-    elif request.method == 'POST':
-        contact_to_delete.delete()
-        return redirect('contacts_table')
-
-
+class ContactDeleteView(DeleteView):
+    model = models.Contacts
+    template_name = 'currency/contact_delete.html'
+    success_url = reverse_lazy('contacts_table')
 
 
 

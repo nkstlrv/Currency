@@ -12,7 +12,7 @@ urlpatterns = [
     
     path('contacts/create/', views.ContactCreateView.as_view(), name='contact_create'),
     path('contacts/update/<int:pk>/', views.ContactUpdateView.as_view(), name='contact_update'),
-    path('contacts/delete/<int:pk>/', views.contact_delete, name='contact_delete'),
+    path('contacts/delete/<int:pk>/', views.ContactDeleteView.as_view(), name='contact_delete'),
     
     path('rates/create/', views.RateCreateView.as_view(), name='rate_create'),
     path('rates/update/<int:pk>/', views.rate_update, name='rate_update'),
