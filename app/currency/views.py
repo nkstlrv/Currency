@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 
 class HomeTemplateView(TemplateView):
@@ -26,12 +26,10 @@ def contacts_json(request):
     return JsonResponse(data)
 
 
-def contacts_table(request):
-    contacts = models.Contacts.objects.all()
-
-    context = {'contacts': contacts}
-
-    return render(request, 'currency/contacts.html', context)
+class ContactsListView(ListView):
+    model = models.Contacts
+    context_object_name = 'contacts'
+    template_name = 'currency/contacts.html'
 
 
 def rates_json(request):
