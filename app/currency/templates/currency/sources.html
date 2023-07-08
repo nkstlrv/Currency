@@ -1,0 +1,58 @@
+{%extends 'currency/base.html'%} 
+{% load static %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'currency/css/table.css' %}" />
+{% endblock%} 
+
+{%block title%}Sources Table{%endblock title%}
+
+{% block content %}
+
+<div class="header">
+  <h1>Sources Table</h1>
+</div>
+
+{% if sources|length > 0 %}
+
+<div class="table-div">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Source Name</th>
+        <th scope="col">Source URL</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for source in sources %}
+
+      <tr>
+        <th scope="row">{{source.id}}</th>
+        <td>{{source.name}}</td>
+        <td>{{source.url}}</td>
+        <td>
+            <div>
+          <a class="edit" href="{% url 'source_update' source.id%}">Edit</a>
+          <base>|</base>
+          <a class="delete" href="{% url 'source_delete' source.id%}">Delete</a>
+        </div>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% else %}
+
+<div class="alert alert-info" role="alert">Table is empty</div>
+
+{% endif %} 
+
+<a href="{% url 'source_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
+    Add Source
+</button></a>
+
+{%endblock content%}

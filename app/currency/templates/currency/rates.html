@@ -3,8 +3,12 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'currency/css/rates.css' %}">
+<link rel="stylesheet" href="{% static 'currency/css/table.css' %}">
 {% endblock%}
+
+
+{%block title%}Rates Table{%endblock title%}
+
 
 {% block content %}
 
@@ -25,6 +29,7 @@
                 <th scope="col">Sell</th>
                 <th scope="col">Source</th>
                 <th scope="col">Created</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,8 +41,19 @@
                 <td>{{rate.currency}}</td>
                 <td>{{rate.buy}}</td>
                 <td>{{rate.sell}}</td>
+                {% if rate.source %}
                 <td>{{rate.source}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
                 <td>{{rate.created}} UTC</td>
+                <td>
+                    <div>
+                  <a class="edit" href="{% url 'rate_update' rate.id %}">Edit</a>
+                  <base>|</base>
+                  <a class="delete" href="{% url 'rate_delete' rate.id %}">Delete</a>
+                </div>
+                </td>
                 
             </tr>
 
@@ -49,11 +65,15 @@
 
 {% else %}
 
+
 <div class="alert alert-info" role="alert">
     Table is empty
 </div>
 
 {% endif %}
+<a href="{% url 'rate_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
+    Add Rate
+</button></a>
 
 
 

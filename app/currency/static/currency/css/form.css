@@ -1,0 +1,21 @@
+.header {
+    text-align: center;
+}
+
+.form-div {
+    margin-left: 50px;
+    margin-right: 100px;
+}
+
+.btn-outline-success {
+    text-align: center;
+}
+
+#yes-delete {
+    margin-right: 50px;
+}
+
+.form-delete {
+    margin-top: 50px;
+    text-align: center;
+}

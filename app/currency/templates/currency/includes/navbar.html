@@ -22,6 +22,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item" href="{% url 'contact_create' %}">Add Contact</a></li>
                     </ul>
                 </li>
 
@@ -36,6 +37,21 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item" href={% url 'rate_create' %}>Add Rate</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Sources
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'sources_table' %}">Table</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href={% url 'source_create' %}>Add Source</a></li>
                     </ul>
                 </li>
                

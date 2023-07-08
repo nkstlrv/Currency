@@ -1,0 +1,23 @@
+{%extends 'currency/base.html'%} 
+{% load static %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
+{% endblock%} 
+{% load crispy_forms_tags %} 
+
+{%block title%}Edit Source{%endblock title%}
+
+{% block content %}
+
+<div class="header">
+  <h1>Edit Source with id ({{id}})</h1>
+</div>
+
+<div class="form-div">
+  <form method="post">
+    {% csrf_token %} {{ form | crispy }}
+    <button type="submit" class="btn btn-outline-success btn-lg">Edit</button>
+  </form>
+</div>
+
+{%endblock content%}

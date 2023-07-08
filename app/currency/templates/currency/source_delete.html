@@ -1,0 +1,26 @@
+{%extends 'currency/base.html'%} 
+{% load static %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
+{% endblock%} 
+{% load crispy_forms_tags %} 
+
+{%block title%}Delete Source{%endblock title%}
+
+{% block content %}
+
+<div class="header">
+  <h1>Are you sure you want to DELETE Source <br> 
+    with parameters: name: <b>{{source.name}}</b>; url:
+    <b>{{source.url}}</b>?</h1>
+</div>
+
+<div class="form-delete">
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" id="yes-delete" class="btn btn-outline-success btn-lg">Yes</button>
+    <a href="{% url 'sources_table' %}" class="btn btn-outline-danger btn-lg">No</a>
+  </form>
+</div>
+
+{%endblock content%}
