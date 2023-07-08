@@ -1,48 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
-from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
 
 class HomeTemplateView(TemplateView):
     template_name = 'currency/index.html'
-
-
-def rates_json(request):
-    data = {}
-
-    rates = models.Rates.objects.all()
-    if rates:
-        for ind, rate in enumerate(rates, start=1):
-            data[ind] = {
-                'id': rate.id,
-                'currency': rate.currency,
-                'buy': rate.buy,
-                'sell': rate.sell,
-                'source': rate.source,
-                'created': rate.created
-            }
-
-    return JsonResponse(data)
-
-
-def contacts_json(request):
-    data = {}
-
-    contacts = models.Contacts.objects.all()
-    if contacts:
-        for ind, contact in enumerate(contacts, start=1):
-            data[ind] = {
-                'id': contact.id,
-                'email_from': contact.email_from,
-                'subject': contact.subject,
-                'message': contact.message
-            }
-
-    return JsonResponse(data)
 
 
 class RatesListView(ListView):
@@ -108,7 +72,7 @@ class SourceCreateView(CreateView):
     form_class = SourcesForm
     template_name = 'currency/source_create.html'
     success_url = reverse_lazy('sources_table')
-    
+
 
 class SourceUpdateView(UpdateView):
     model = models.Sources
@@ -121,3 +85,37 @@ class SourceDeleteView(DeleteView):
     model = models.Sources
     template_name = 'currency/source_delete.html'
     success_url = reverse_lazy('sources_table')
+
+
+def rates_json(request):
+    data = {}
+
+    rates = models.Rates.objects.all()
+    if rates:
+        for ind, rate in enumerate(rates, start=1):
+            data[ind] = {
+                'id': rate.id,
+                'currency': rate.currency,
+                'buy': rate.buy,
+                'sell': rate.sell,
+                'source': rate.source,
+                'created': rate.created
+            }
+
+    return JsonResponse(data)
+
+
+def contacts_json(request):
+    data = {}
+
+    contacts = models.Contacts.objects.all()
+    if contacts:
+        for ind, contact in enumerate(contacts, start=1):
+            data[ind] = {
+                'id': contact.id,
+                'email_from': contact.email_from,
+                'subject': contact.subject,
+                'message': contact.message
+            }
+
+    return JsonResponse(data)
