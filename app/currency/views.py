@@ -49,6 +49,29 @@ class RatesListView(ListView):
     model = models.Rates
     context_object_name = 'rates'
     template_name = 'currency/rates.html'
+    
+    
+class RateCreateView(CreateView):
+    model = models.Rates
+    form_class = RatesForm
+    template_name = 'currency/rate_create.html'
+    success_url = reverse_lazy('rates_table')
+    
+    
+    
+def rate_create(request):
+    if request.method == 'POST':
+        form = RatesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('rates_table')
+
+    form = RatesForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'currency/rate_create.html', context)    
 
 
 class ContactsListView(ListView):
@@ -62,23 +85,6 @@ class ContactCreateView(CreateView):
     template_name = 'currency/contact_create.html'
     success_url = reverse_lazy('contacts_table')
     
-    
-    
-# def contact_create(request):
-#     if request.method == 'POST':
-#         form = ContactsForm(request.POST)
-
-#         if form.is_valid():
-#             form.save()
-#             return redirect('contacts_table')
-
-#     form = ContactsForm()
-
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'currency/contact_create.html', context)
-
 
 def contact_update(request, pk):
     contact_to_update = get_object_or_404(models.Contacts, id=pk)
@@ -109,19 +115,7 @@ def contact_delete(request, pk):
         return redirect('contacts_table')
 
 
-def rate_create(request):
-    if request.method == 'POST':
-        form = RatesForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('rates_table')
 
-    form = RatesForm()
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'currency/rate_create.html', context)
 
 
 def rate_update(request, pk):
