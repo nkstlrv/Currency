@@ -18,8 +18,8 @@ urlpatterns = [
     path('rates/update/<int:pk>/', views.RateUpdateView.as_view(), name='rate_update'),
     path('rates/delete/<int:pk>/', views.RateDeleteView.as_view(), name='rate_delete'),
     
-    path('sources/table/', views.sources_table, name='sources_table'),
-    path('sources/create/', views.source_create, name='source_create'),
-    path('sources/update/<int:pk>/', views.source_update, name='source_update'),
-    path('sources/delete/<int:pk>/', views.source_delete, name='source_delete'),
+    path('sources/table/', views.SourcesListView.as_view(), name='sources_table'),
+    path('sources/create/', views.SourceCreateView.as_view(), name='source_create'),
+    path('sources/update/<int:pk>/', views.SourceUpdateView.as_view(), name='source_update'),
+    path('sources/delete/<int:pk>/', views.SourceDeleteView.as_view(), name='source_delete'),
 ]

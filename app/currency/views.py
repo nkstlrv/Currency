@@ -49,20 +49,21 @@ class RatesListView(ListView):
     model = models.Rates
     context_object_name = 'rates'
     template_name = 'currency/rates.html'
-    
-    
+
+
 class RateCreateView(CreateView):
     model = models.Rates
     form_class = RatesForm
     template_name = 'currency/rate_create.html'
     success_url = reverse_lazy('rates_table')
 
+
 class RateUpdateView(UpdateView):
     model = models.Rates
     form_class = RatesForm
     template_name = 'currency/rate_update.html'
     success_url = reverse_lazy('rates_table')
-    
+
 
 class RateDeleteView(DeleteView):
     model = models.Rates
@@ -75,13 +76,14 @@ class ContactsListView(ListView):
     context_object_name = 'contacts'
     template_name = 'currency/contacts.html'
 
+
 class ContactCreateView(CreateView):
     model = models.Contacts
     form_class = ContactsForm
     template_name = 'currency/contact_create.html'
     success_url = reverse_lazy('contacts_table')
-    
-    
+
+
 class ContactUpdateView(UpdateView):
     model = models.Contacts
     form_class = ContactsForm
@@ -95,56 +97,27 @@ class ContactDeleteView(DeleteView):
     success_url = reverse_lazy('contacts_table')
 
 
+class SourcesListView(ListView):
+    model = models.Sources
+    context_object_name = 'sources'
+    template_name = 'currency/sources.html'
 
 
+class SourceCreateView(CreateView):
+    model = models.Sources
+    form_class = SourcesForm
+    template_name = 'currency/source_create.html'
+    success_url = reverse_lazy('sources_table')
+    
 
-def sources_table(request):
-    sources = models.Sources.objects.all()
-
-    context = {'sources': sources}
-
-    return render(request, 'currency/sources.html', context)
-
-
-def source_create(request):
-    if request.method == 'POST':
-        form = SourcesForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('sources_table')
-
-    form = SourcesForm()
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'currency/source_create.html', context)
+class SourceUpdateView(UpdateView):
+    model = models.Sources
+    form_class = SourcesForm
+    template_name = 'currency/source_update.html'
+    success_url = reverse_lazy('sources_table')
 
 
-def source_update(request, pk):
-    source_to_update = get_object_or_404(models.Sources, id=pk)
-    if request.method == 'POST':
-        form = SourcesForm(request.POST, instance=source_to_update)
-        if form.is_valid():
-            form.save()
-            return redirect('sources_table')
-    form = SourcesForm(instance=source_to_update)
-
-    context = {
-        'form': form,
-        'id': pk
-    }
-
-    return render(request, 'currency/source_update.html', context)
-
-
-def source_delete(request, pk):
-    source_to_delete = get_object_or_404(models.Sources, id=pk)
-    if request.method == 'GET':
-        context = {
-            'source': source_to_delete
-        }
-        return render(request, 'currency/source_delete.html', context)
-    elif request.method == 'POST':
-        source_to_delete.delete()
-        return redirect('sources_table')
+class SourceDeleteView(DeleteView):
+    model = models.Sources
+    template_name = 'currency/source_delete.html'
+    success_url = reverse_lazy('sources_table')
