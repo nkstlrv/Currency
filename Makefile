@@ -1,4 +1,4 @@
-runserver:
+run:
 	python app/manage.py runserver
 
 migrate:
