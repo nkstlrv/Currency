@@ -1,8 +1,8 @@
 from django.contrib import admin
-from currency.models import Rates
+from currency.models import Rate
 
 
-@admin.register(Rates)
+@admin.register(Rate)
 class RateAdmin(admin.ModelAdmin):
     list_display = (
         'id',
