@@ -22,6 +22,10 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return f"{self.subject} | {self.message} | by {self.email_from}"
+    
+    class Meta:
+        verbose_name = 'ContactUs'
+        verbose_name_plural = 'ContactUs'
 
 
 class Source(models.Model):
