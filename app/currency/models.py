@@ -1,13 +1,19 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-
-# from django.contrib.auth.models import User
+from .choices import RateCurrencyChoices
+from django.utils.translation import gettext_lazy as _
 
 
 class Rate(models.Model):
     buy = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     sell = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
-    currency = models.CharField(max_length=4)
+    
+    currency = models.PositiveSmallIntegerField(_('Currency'),
+                                                max_length=3,
+                                                choices=RateCurrencyChoices.choices,
+                                                default=RateCurrencyChoices.USD,
+                                                )
+    
     source = models.CharField(max_length=255, default=None, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
