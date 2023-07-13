@@ -7,13 +7,13 @@ from django.utils.translation import gettext_lazy as _
 class Rate(models.Model):
     buy = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     sell = models.DecimalField(max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)])
-    
+
     currency = models.PositiveSmallIntegerField(_('Currency'),
                                                 max_length=3,
                                                 choices=RateCurrencyChoices.choices,
                                                 default=RateCurrencyChoices.USD,
                                                 )
-    
+
     source = models.CharField(max_length=255, default=None, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -28,7 +28,7 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return f"{self.subject} | {self.message} | by {self.email_from}"
-    
+
     class Meta:
         verbose_name = 'ContactUs'
         verbose_name_plural = 'ContactUs'
