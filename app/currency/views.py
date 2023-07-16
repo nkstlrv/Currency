@@ -10,79 +10,79 @@ class HomeTemplateView(TemplateView):
 
 
 class RatesListView(ListView):
-    model = models.Rates
+    model = models.Rate
     context_object_name = 'rates'
     template_name = 'currency/rates.html'
 
 
 class RateCreateView(CreateView):
-    model = models.Rates
+    model = models.Rate
     form_class = RatesForm
     template_name = 'currency/rate_create.html'
     success_url = reverse_lazy('rates_table')
 
 
 class RateUpdateView(UpdateView):
-    model = models.Rates
+    model = models.Rate
     form_class = RatesForm
     template_name = 'currency/rate_update.html'
     success_url = reverse_lazy('rates_table')
 
 
 class RateDeleteView(DeleteView):
-    model = models.Rates
+    model = models.Rate
     template_name = 'currency/rate_delete.html'
     success_url = reverse_lazy('rates_table')
 
 
 class ContactsListView(ListView):
-    model = models.Contacts
+    model = models.ContactUs
     context_object_name = 'contacts'
     template_name = 'currency/contacts.html'
 
 
 class ContactCreateView(CreateView):
-    model = models.Contacts
+    model = models.ContactUs
     form_class = ContactsForm
     template_name = 'currency/contact_create.html'
     success_url = reverse_lazy('contacts_table')
 
 
 class ContactUpdateView(UpdateView):
-    model = models.Contacts
+    model = models.ContactUs
     form_class = ContactsForm
     template_name = 'currency/contact_update.html'
     success_url = reverse_lazy('contacts_table')
 
 
 class ContactDeleteView(DeleteView):
-    model = models.Contacts
+    model = models.ContactUs
     template_name = 'currency/contact_delete.html'
     success_url = reverse_lazy('contacts_table')
 
 
 class SourcesListView(ListView):
-    model = models.Sources
+    model = models.Source
     context_object_name = 'sources'
     template_name = 'currency/sources.html'
 
 
 class SourceCreateView(CreateView):
-    model = models.Sources
+    model = models.Source
     form_class = SourcesForm
     template_name = 'currency/source_create.html'
     success_url = reverse_lazy('sources_table')
 
 
 class SourceUpdateView(UpdateView):
-    model = models.Sources
+    model = models.Source
     form_class = SourcesForm
     template_name = 'currency/source_update.html'
     success_url = reverse_lazy('sources_table')
 
 
 class SourceDeleteView(DeleteView):
-    model = models.Sources
+    model = models.Source
     template_name = 'currency/source_delete.html'
     success_url = reverse_lazy('sources_table')
 
@@ -90,7 +90,7 @@ class SourceDeleteView(DeleteView):
 def rates_json(request):
     data = {}
 
-    rates = models.Rates.objects.all()
+    rates = models.Rate.objects.all()
     if rates:
         for ind, rate in enumerate(rates, start=1):
             data[ind] = {
@@ -108,7 +108,7 @@ def rates_json(request):
 def contacts_json(request):
     data = {}
 
-    contacts = models.Contacts.objects.all()
+    contacts = models.ContactUs.objects.all()
     if contacts:
         for ind, contact in enumerate(contacts, start=1):
             data[ind] = {

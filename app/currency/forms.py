@@ -1,10 +1,10 @@
 from django import forms
-from currency.models import Contacts, Rates, Sources
+from currency.models import ContactUs, Rate, Source
 
 
 class ContactsForm(forms.ModelForm):
     class Meta:
-        model = Contacts
+        model = ContactUs
         fields = (
             'email_from',
             'subject',
@@ -24,7 +24,7 @@ class ContactsForm(forms.ModelForm):
 
 class RatesForm(forms.ModelForm):
     class Meta:
-        model = Rates
+        model = Rate
         fields = (
             'currency',
             'buy',
@@ -40,13 +40,13 @@ class RatesForm(forms.ModelForm):
         widgets = {
             'currency': forms.TextInput(attrs={'placeholder': 'Enter currency shortcut (usd, uah, etc.)'}),
 
-            'source': forms.TextInput(attrs={'placeholder': 'Enter cuurency rate source'}),
+            'source': forms.TextInput(attrs={'placeholder': 'Enter curency rate source'}),
         }
 
 
 class SourcesForm(forms.ModelForm):
     class Meta:
-        model = Sources
+        model = Source
         fields = (
             'name',
             'url'
