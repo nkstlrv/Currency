@@ -9,6 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+from django.core.mail import send_mail
 
 
 class HomeTemplateView(TemplateView):
@@ -52,6 +53,9 @@ class ContactCreateView(CreateView):
     form_class = ContactsForm
     template_name = "currency/contact_create.html"
     success_url = reverse_lazy("contacts_table")
+
+    def create(self):
+        pass
 
 
 class ContactUpdateView(UpdateView):
