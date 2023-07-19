@@ -9,7 +9,9 @@ class RequestResponseLogMiddleware:
     def __call__(self, request):
         start = time()
         response = self.get_response(request)
-        middleware_time = round((time() - start), 3)
-        print(middleware_time)
+
+        RequestResponseLog.objects.create(method=request.method,
+                                          path=request.path,
+                                          time=round((time() - start), 3))
 
         return response
