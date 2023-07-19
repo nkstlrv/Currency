@@ -13,5 +13,4 @@ class RequestResponseLogMiddleware:
         RequestResponseLog.objects.create(method=request.method,
                                           path=request.path,
                                           time=round((time() - start), 3))
-
         return response
