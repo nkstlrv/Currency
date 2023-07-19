@@ -49,7 +49,7 @@ class Source(models.Model):
 
 class RequestResponseLog(models.Model):
     path = models.CharField(max_length=255)
-    method = models.CharField(max_length=10, default='GET')
+    method = models.CharField(max_length=10, default="GET")
     status_code = models.IntegerField(default=200)
     created = models.DateTimeField(default=timezone.now, blank=True)
 

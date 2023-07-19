@@ -59,7 +59,6 @@ class ContactCreateView(CreateView):
 
         email_body = f"""
         From: {cleaned_data['email_from']}
-        
         Subject: {cleaned_data['subject']}
         Message: {cleaned_data['message']}
         """

@@ -70,15 +70,14 @@ class SourceAdmin(admin.ModelAdmin):
 
 
 @admin.register(RequestResponseLog)
-class SourceAdmin(admin.ModelAdmin):
+class RequestResponseLogAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "created",
         "method",
+        "status_code",
         "path",
         "time",
     )
 
-    list_filter = (
-        'method',
-    )
+    list_filter = ("method",)

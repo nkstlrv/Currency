@@ -2,7 +2,11 @@ from django.urls import path
 from currency import views
 
 urlpatterns = [
-    path("requestresponcelogs/list/", views.MiddlewareLogListView.as_view(), name="middlewarelog_list"),
+    path(
+        "requestresponcelogs/list/",
+        views.MiddlewareLogListView.as_view(),
+        name="middlewarelog_list",
+    ),
     path(
         "sources/delete/<int:pk>/",
         views.SourceDeleteView.as_view(),

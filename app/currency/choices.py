@@ -9,5 +9,3 @@ class RateCurrencyChoices(models.IntegerChoices):
     PLN = 4, _("Polish Zloty")
     CHF = 5, _("Swiss Franc")
     BTC = 6, _("Bitcoin")
-
-
