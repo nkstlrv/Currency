@@ -51,7 +51,6 @@ class RequestResponseLog(models.Model):
     path = models.CharField(max_length=255)
     request_method = models.PositiveSmallIntegerField(
         _("RequestMethod"),
-        max_length=1,
         choices=RequestMethodChoices.choices,
         default=RequestMethodChoices.GET,
     )
