@@ -4,15 +4,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('currency', '0010_alter_contactus_options'),
+        ("currency", "0010_alter_contactus_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='rate',
-            name='currency',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'US Dollar'), (2, 'Euro'), (3, 'Hryvnia'), (4, 'Polish Zloty'), (5, 'Swiss Franc'), (6, 'Bitcoin')], default=1, max_length=3, verbose_name='Currency'),
+            model_name="rate",
+            name="currency",
+            field=models.PositiveSmallIntegerField(
+                choices=[
+                    (1, "US Dollar"),
+                    (2, "Euro"),
+                    (3, "Hryvnia"),
+                    (4, "Polish Zloty"),
+                    (5, "Swiss Franc"),
+                    (6, "Bitcoin"),
+                ],
+                default=1,
+                max_length=3,
+                verbose_name="Currency",
+            ),
         ),
     ]

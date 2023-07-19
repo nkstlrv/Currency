@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('currency', '0009_rename_contacts_contactus_rename_rates_rate_and_more'),
+        ("currency", "0009_rename_contacts_contactus_rename_rates_rate_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='contactus',
-            options={'verbose_name': 'ContactUs', 'verbose_name_plural': 'ContactUs'},
+            name="contactus",
+            options={"verbose_name": "ContactUs", "verbose_name_plural": "ContactUs"},
         ),
     ]

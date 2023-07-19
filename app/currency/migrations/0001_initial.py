@@ -5,31 +5,61 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ContactUs',
+            name="ContactUs",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email_from', models.EmailField(max_length=254)),
-                ('subject', models.CharField(max_length=255)),
-                ('message', models.CharField(max_length=2500)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email_from", models.EmailField(max_length=254)),
+                ("subject", models.CharField(max_length=255)),
+                ("message", models.CharField(max_length=2500)),
             ],
         ),
         migrations.CreateModel(
-            name='Rates',
+            name="Rates",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('buy', models.DecimalField(decimal_places=2, default=0, max_digits=8, validators=[django.core.validators.MinValueValidator(0)])),
-                ('sell', models.DecimalField(decimal_places=2, default=0, max_digits=8, validators=[django.core.validators.MinValueValidator(0)])),
-                ('currency', models.CharField(max_length=4, unique=True)),
-                ('source', models.CharField(blank=True, max_length=255)),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "buy",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0,
+                        max_digits=8,
+                        validators=[django.core.validators.MinValueValidator(0)],
+                    ),
+                ),
+                (
+                    "sell",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0,
+                        max_digits=8,
+                        validators=[django.core.validators.MinValueValidator(0)],
+                    ),
+                ),
+                ("currency", models.CharField(max_length=4, unique=True)),
+                ("source", models.CharField(blank=True, max_length=255)),
+                ("created", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]
