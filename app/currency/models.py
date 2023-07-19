@@ -49,9 +49,9 @@ class Source(models.Model):
 
 class RequestResponseLog(models.Model):
     path = models.CharField(max_length=255)
-    request_method = models.CharField(max_length=10, default='GET')
+    method = models.CharField(max_length=10, default='GET')
     time = models.DecimalField(decimal_places=3, max_digits=6)
     created = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
-        return f"{self.request_method} | {self.path[0:10]} at {self.created} for {self.time}"
+        return f"{self.method} | {self.path[0:10]} at {self.created} for {self.time}"

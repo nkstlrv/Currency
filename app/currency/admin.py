@@ -1,5 +1,5 @@
 from django.contrib import admin
-from currency.models import Rate, ContactUs, Source
+from currency.models import Rate, ContactUs, Source, RequestResponseLog
 
 
 @admin.register(Rate)
@@ -66,4 +66,19 @@ class SourceAdmin(admin.ModelAdmin):
     search_fields = (
         "id",
         "name",
+    )
+
+
+@admin.register(RequestResponseLog)
+class SourceAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "created",
+        "method",
+        "path",
+        "time",
+    )
+
+    list_filter = (
+        'method',
     )
