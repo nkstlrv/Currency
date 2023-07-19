@@ -1,6 +1,5 @@
 from .models import RequestResponseLog
 from time import time
-from datetime import datetime
 
 
 class RequestResponseLogMiddleware:
@@ -8,11 +7,9 @@ class RequestResponseLogMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        print('[RequestResponseLog middleware]')
+        start = time()
         response = self.get_response(request)
-        print(request.method)
-        print(request.path)
-        print(datetime.now().strftime('%d/%b/%Y %H:%M:%S'))
-        print(int(time()))
+        middleware_time = round((time() - start), 3)
+        print(middleware_time)
 
         return response
