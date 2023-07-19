@@ -24,14 +24,6 @@ class RatesForm(forms.ModelForm):
             "sell": "Sell",
             "source": "Source",
         }
-        widgets = {
-            "currency": forms.TextInput(
-                attrs={"placeholder": "Enter currency shortcut (usd, uah, etc.)"}
-            ),
-            "source": forms.TextInput(
-                attrs={"placeholder": "Enter curency rate source"}
-            ),
-        }
 
 
 class SourcesForm(forms.ModelForm):
