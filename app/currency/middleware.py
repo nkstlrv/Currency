@@ -11,6 +11,7 @@ class RequestResponseLogMiddleware:
         response = self.get_response(request)
 
         RequestResponseLog.objects.create(method=request.method,
+                                          status_code=response.status_code,
                                           path=request.path,
                                           time=round((time() - start), 3))
         return response
