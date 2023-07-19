@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from .choices import RateCurrencyChoices, RequestMethodChoices
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
 class Rate(models.Model):
@@ -48,11 +49,7 @@ class Source(models.Model):
 
 class RequestResponseLog(models.Model):
     path = models.CharField(max_length=255)
-    request_method = models.PositiveSmallIntegerField(
-        _("RequestMethod"),
-        choices=RequestMethodChoices.choices,
-        default=RequestMethodChoices.GET,
-    )
+    request_method = models.CharField(max_length=10, default='GET')
     time = models.IntegerField()
 
     def __str__(self):
