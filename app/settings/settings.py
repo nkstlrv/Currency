@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Custom middleware
-    'currency.middleware.RateMiddleware',
+    'currency.middleware.RequestResponseLogMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'

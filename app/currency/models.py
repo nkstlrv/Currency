@@ -14,7 +14,6 @@ class Rate(models.Model):
 
     currency = models.PositiveSmallIntegerField(
         _("Currency"),
-        max_length=3,
         choices=RateCurrencyChoices.choices,
         default=RateCurrencyChoices.USD,
     )
