@@ -49,6 +49,7 @@ EXTERNAL_APPS = [
 
 INTERNAL_APPS = [
     "currency",
+    "authentication",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
