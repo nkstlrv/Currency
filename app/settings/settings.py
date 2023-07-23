@@ -43,8 +43,6 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = [
     "django_extensions",
-    "crispy_forms",
-    "crispy_bootstrap5",
 ]
 
 INTERNAL_APPS = [
@@ -135,7 +133,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
