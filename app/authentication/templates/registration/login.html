@@ -1,0 +1,18 @@
+{%extends 'currency/base.html'%}
+
+{%block title%}Login{%endblock title%}
+
+{% block content %}
+
+<div>
+    <h1>Login Form</h1>
+</div>
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-outline-success btn-lg">Submit</button>
+    </form>
+</div>
+{%endblock content%}

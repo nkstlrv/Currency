@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Currency</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
@@ -15,7 +15,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Contacts
                     </a>
                     <ul class="dropdown-menu">
@@ -30,7 +30,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Rates
                     </a>
                     <ul class="dropdown-menu">
@@ -45,7 +45,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Sources
                     </a>
                     <ul class="dropdown-menu">
@@ -61,13 +61,25 @@
                     <a class="nav-link silent" aria-current="page" href="{% url 'middlewarelog_list' %}">
                         Middleware Logs</a>
                 </li>
-               
+
             </ul>
             <div style="margin: 5px;">
-            <button type="button" class="btn btn-primary" style="margin-right: 10px">Log In</button>
-            <button type="button" class="btn btn-outline-primary">Sign Up</button>
+                {% if user.is_authenticated %}
+
+                <a href="{% url 'logout' %}" type="button" class="btn btn--outline-secondary"
+                   style="margin-right: 10px">
+                    Log Out</a>
+
+                {% else %}
+
+                <a href="{% url 'login' %}" type="button" class="btn btn-primary"
+                   style="margin-right: 10px">
+                    Log In</a>
+                <a type="button" class="btn btn-outline-primary">Sign Up</a>
+
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 </nav>
 
