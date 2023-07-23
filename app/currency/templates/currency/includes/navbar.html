@@ -62,9 +62,24 @@
                         Middleware Logs</a>
                 </li>
 
+               
+
             </ul>
             <div style="margin: 5px;">
                 {% if user.is_authenticated %}
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Profile
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">Action</button>
+                      <button class="dropdown-item" type="button">Another action</button>
+                      <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
+                  </div>
+
+                  
 
                 <a href="{% url 'logout' %}" type="button" class="btn btn--outline-secondary"
                    style="margin-right: 10px">
