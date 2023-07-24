@@ -77,8 +77,8 @@
                           
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                               <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile View</a>
-                              <a class="dropdown-item" href="#">Change Password</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
+                              <a class="dropdown-item" href="{% url 'password-change' user.id %}">Change Password</a>
+                            
                             </div>
                           </div>
 
