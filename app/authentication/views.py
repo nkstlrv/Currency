@@ -10,7 +10,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProgileView(UpdateView):
+class ProgileView(UpdateView, LoginRequiredMixin):
     model = get_user_model()
     template_name = 'authentication/profile_view.html'
     success_url = reverse_lazy('home')
@@ -35,7 +35,7 @@ class PasswordResetView(FormView):
         return super().form_valid(form)
     
 
-class PasswordChangeView(PasswordChangeView):
+class PasswordChangeView(PasswordChangeView, LoginRequiredMixin):
     form_class = PasswordChangeForm
     template_name = 'authentication/password_change.html'
     success_url = reverse_lazy('home')
