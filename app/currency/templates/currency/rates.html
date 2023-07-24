@@ -29,7 +29,9 @@
                 <th scope="col">Sell</th>
                 <th scope="col">Source</th>
                 <th scope="col">Created</th>
+                {% if user.is_authenticated %}
                 <th scope="col">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -47,6 +49,7 @@
                 <td>-</td>
                 {% endif %}
                 <td>{{rate.created}} UTC</td>
+                {% if user.is_authenticated %}
                 <td>
                     <div>
                   <a class="edit" href="{% url 'rate_update' rate.id %}">Edit</a>
@@ -54,7 +57,7 @@
                   <a class="delete" href="{% url 'rate_delete' rate.id %}">Delete</a>
                 </div>
                 </td>
-                
+                {% endif %}
             </tr>
 
             {% endfor %}
@@ -71,10 +74,12 @@
 </div>
 
 {% endif %}
+
+{% if user.is_authenticated %}
 <a href="{% url 'rate_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
     Add Rate
 </button></a>
-
+{% endif %}
 
 
 {%endblock content%}

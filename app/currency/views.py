@@ -49,32 +49,32 @@ class ContactsListView(ListView):
     template_name = "currency/contacts.html"
 
 
-class ContactCreateView(CreateView, LoginRequiredMixin):
+class ContactCreateView(CreateView):
     model = models.ContactUs
     form_class = ContactsForm
     template_name = "currency/contact_create.html"
     success_url = reverse_lazy("contacts_table")
 
-    def form_valid(self, form):
-        cleaned_data = form.cleaned_data
+    # def form_valid(self, form):
+    #     cleaned_data = form.cleaned_data
 
-        email_body = f"""
-        From: {cleaned_data['email_from']}
-        Subject: {cleaned_data['subject']}
-        Message: {cleaned_data['message']}
-        """
+    #     email_body = f"""
+    #     From: {cleaned_data['email_from']}
+    #     Subject: {cleaned_data['subject']}
+    #     Message: {cleaned_data['message']}
+    #     """
 
-        from django.conf import settings
+    #     from django.conf import settings
 
-        send_mail(
-            "Contact Us",
-            email_body,
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
+    #     send_mail(
+    #         "Contact Us",
+    #         email_body,
+    #         settings.EMAIL_HOST_USER,
+    #         [settings.EMAIL_HOST_USER],
+    #         fail_silently=False,
+    #     )
 
-        return super().form_valid(form)
+    #     return super().form_valid(form)
 
 
 class ContactUpdateView(UpdateView, LoginRequiredMixin):
