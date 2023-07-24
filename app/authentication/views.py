@@ -28,10 +28,6 @@ class PasswordResetView(FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "Successful password reset")
         return super().form_valid(form)
     
-    # def form_invalid(self, form):
-    #     for field_errors in form.errors.values():
-    #         for error in field_errors:
-    #             messages.success(self.request, error)
-    #     return super().form_invalid(form)
