@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+# from django.http import HttpResponse
+# from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.views.generic import UpdateView, FormView
 from django.urls import reverse_lazy
@@ -19,9 +19,10 @@ class ProgileView(UpdateView, LoginRequiredMixin):
         'last_name',
         'email',
         'username',
-        'is_superuser', # This is temporary field; will be removed when registration will be availale
-    
-    )   
+
+        # This is temporary field; will be removed when registration will be availale
+        'is_superuser',
+    )
 
 
 class PasswordResetView(FormView):
@@ -33,7 +34,7 @@ class PasswordResetView(FormView):
         form.save()
         messages.success(self.request, "Successful password reset")
         return super().form_valid(form)
-    
+
 
 class PasswordChangeView(PasswordChangeView, LoginRequiredMixin):
     form_class = PasswordChangeForm

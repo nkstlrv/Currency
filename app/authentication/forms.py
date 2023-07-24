@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.forms import PasswordChangeForm
+# from django.contrib.auth import get_user_model
+# from django.contrib.auth.hashers import check_password
+# from django.contrib.auth.forms import PasswordChangeForm
+
 
 class PasswordResetForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput)
@@ -19,10 +20,10 @@ class PasswordResetForm(forms.Form):
         email = self.cleaned_data.get('email')
         try:
             user = User.objects.get(email=email)
+            user
         except User.DoesNotExist:
             raise forms.ValidationError("User with this email does not exist.")
         return email
-
 
     def clean(self):
         cleaned_data = super().clean()

@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -49,7 +49,7 @@ class ContactsListView(ListView):
     template_name = "currency/contacts.html"
 
 
-class ContactCreateView(CreateView):
+class ContactCreateView(CreateView, LoginRequiredMixin):
     model = models.ContactUs
     form_class = ContactsForm
     template_name = "currency/contact_create.html"
