@@ -21,10 +21,12 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'contacts_json' %}">JSON</a></li>
                         <li><a class="dropdown-item" href="{% url 'contacts_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="{% url 'contact_create' %}">Add Contact</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 
@@ -36,10 +38,12 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'rates_json' %}">JSON</a></li>
                         <li><a class="dropdown-item" href="{% url 'rates_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href={% url 'rate_create' %}>Add Rate</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 
@@ -50,19 +54,23 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'sources_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href={% url 'source_create' %}>Add Source</a></li>
+                        {% endif %}
                     </ul>
                 </li>
+
+                {% if user.is_authenticated %}
 
                 <li class="nav-item">
                     <a class="nav-link silent" aria-current="page" href="{% url 'middlewarelog_list' %}">
                         Middleware Logs</a>
                 </li>
 
-               
+               {% endif %}
 
             </ul>
             <div style="margin: 5px;">
