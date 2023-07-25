@@ -9,7 +9,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class HomeTemplateView(TemplateView):
@@ -22,21 +23,21 @@ class RatesListView(ListView):
     template_name = "currency/rates.html"
 
 
-class RateCreateView(CreateView):
+class RateCreateView(CreateView, LoginRequiredMixin):
     model = models.Rate
     form_class = RatesForm
     template_name = "currency/rate_create.html"
     success_url = reverse_lazy("rates_table")
 
 
-class RateUpdateView(UpdateView):
+class RateUpdateView(UpdateView, LoginRequiredMixin):
     model = models.Rate
     form_class = RatesForm
     template_name = "currency/rate_update.html"
     success_url = reverse_lazy("rates_table")
 
 
-class RateDeleteView(DeleteView):
+class RateDeleteView(DeleteView, LoginRequiredMixin):
     model = models.Rate
     template_name = "currency/rate_delete.html"
     success_url = reverse_lazy("rates_table")
@@ -48,42 +49,42 @@ class ContactsListView(ListView):
     template_name = "currency/contacts.html"
 
 
-class ContactCreateView(CreateView):
+class ContactCreateView(CreateView, LoginRequiredMixin):
     model = models.ContactUs
     form_class = ContactsForm
     template_name = "currency/contact_create.html"
     success_url = reverse_lazy("contacts_table")
 
-    def form_valid(self, form):
-        cleaned_data = form.cleaned_data
+    # def form_valid(self, form):
+    #     cleaned_data = form.cleaned_data
 
-        email_body = f"""
-        From: {cleaned_data['email_from']}
-        Subject: {cleaned_data['subject']}
-        Message: {cleaned_data['message']}
-        """
+    #     email_body = f"""
+    #     From: {cleaned_data['email_from']}
+    #     Subject: {cleaned_data['subject']}
+    #     Message: {cleaned_data['message']}
+    #     """
 
-        from django.conf import settings
+    #     from django.conf import settings
 
-        send_mail(
-            "Contact Us",
-            email_body,
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
+    #     send_mail(
+    #         "Contact Us",
+    #         email_body,
+    #         settings.EMAIL_HOST_USER,
+    #         [settings.EMAIL_HOST_USER],
+    #         fail_silently=False,
+    #     )
 
-        return super().form_valid(form)
+    #     return super().form_valid(form)
 
 
-class ContactUpdateView(UpdateView):
+class ContactUpdateView(UpdateView, LoginRequiredMixin):
     model = models.ContactUs
     form_class = ContactsForm
     template_name = "currency/contact_update.html"
     success_url = reverse_lazy("contacts_table")
 
 
-class ContactDeleteView(DeleteView):
+class ContactDeleteView(DeleteView, LoginRequiredMixin):
     model = models.ContactUs
     template_name = "currency/contact_delete.html"
     success_url = reverse_lazy("contacts_table")
@@ -95,27 +96,27 @@ class SourcesListView(ListView):
     template_name = "currency/sources.html"
 
 
-class SourceCreateView(CreateView):
+class SourceCreateView(CreateView, LoginRequiredMixin):
     model = models.Source
     form_class = SourcesForm
     template_name = "currency/source_create.html"
     success_url = reverse_lazy("sources_table")
 
 
-class SourceUpdateView(UpdateView):
+class SourceUpdateView(UpdateView, LoginRequiredMixin):
     model = models.Source
     form_class = SourcesForm
     template_name = "currency/source_update.html"
     success_url = reverse_lazy("sources_table")
 
 
-class SourceDeleteView(DeleteView):
+class SourceDeleteView(DeleteView, LoginRequiredMixin):
     model = models.Source
     template_name = "currency/source_delete.html"
     success_url = reverse_lazy("sources_table")
 
 
-class MiddlewareLogListView(ListView):
+class MiddlewareLogListView(ListView, LoginRequiredMixin):
     model = models.RequestResponseLog
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"

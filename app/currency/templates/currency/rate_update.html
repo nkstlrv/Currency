@@ -2,8 +2,7 @@
 {% load static %} 
 {% block css %}
 <link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
-{% endblock%} 
-{% load crispy_forms_tags %} 
+{% endblock%}
 
 {%block title%}Edit Rate{%endblock title%}
 
@@ -15,7 +14,8 @@
 
 <div class="form-div">
   <form method="post">
-    {% csrf_token %} {{ form | crispy }}
+    {% csrf_token %} 
+    {{ form.as_p }}
     <button type="submit" class="btn btn-outline-success btn-lg">Edit</button>
   </form>
 </div>

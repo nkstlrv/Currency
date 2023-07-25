@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Currency</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
@@ -15,59 +15,95 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Contacts
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'contacts_json' %}">JSON</a></li>
                         <li><a class="dropdown-item" href="{% url 'contacts_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="{% url 'contact_create' %}">Add Contact</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Rates
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'rates_json' %}">JSON</a></li>
                         <li><a class="dropdown-item" href="{% url 'rates_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href={% url 'rate_create' %}>Add Rate</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                       aria-expanded="false">
                         Sources
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'sources_table' %}">Table</a></li>
+                        {% if user.is_authenticated %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href={% url 'source_create' %}>Add Source</a></li>
+                        {% endif %}
                     </ul>
                 </li>
+
+                {% if user.is_authenticated %}
 
                 <li class="nav-item">
                     <a class="nav-link silent" aria-current="page" href="{% url 'middlewarelog_list' %}">
                         Middleware Logs</a>
                 </li>
-               
+
+               {% endif %}
+
             </ul>
             <div style="margin: 5px;">
-            <button type="button" class="btn btn-primary" style="margin-right: 10px">Log In</button>
-            <button type="button" class="btn btn-outline-primary">Sign Up</button>
+                {% if user.is_authenticated %}
+
+                <div class="collapse navbar-collapse" id="navbarScroll">
+        
+                        <div class="dropdown show">
+                            <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              {{user.username}}
+                            </a>
+                          
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile View</a>
+                              <a class="dropdown-item" href="{% url 'password-change' user.id %}">Change Password</a>
+                            
+                            </div>
+                          </div>
+
+                <a href="{% url 'logout' %}" type="button" class="btn btn--outline-secondary"
+                   style="margin-right: 10px">
+                    Log Out</a>
+
+                {% else %}
+
+                <a href="{% url 'login' %}" type="button" class="btn btn-primary"
+                   style="margin-right: 10px">
+                    Log In</a>
+                <a type="button" class="btn btn-outline-primary">Sign Up</a>
+
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 </nav>
 
