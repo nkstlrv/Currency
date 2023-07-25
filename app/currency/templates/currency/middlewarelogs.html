@@ -1,0 +1,61 @@
+{% extends 'currency/base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'currency/css/table.css' %}">
+{% endblock %}
+
+
+{% block title %}Middleware Logs{% endblock title %}
+
+
+{% block content %}
+
+    <div class="header">
+        <h1>Middleware Logs Table</h1>
+    </div>
+
+    {% if logs|length > 0 %}
+
+        <div class="table-div">
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">DateTime</th>
+                    <th scope="col">Method</th>
+                    <th scope="col">Status Code</th>
+                    <th scope="col">Path</th>
+                    <th scope="col">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for log in logs reversed %}
+
+                    <tr>
+                        <th scope="row">{{ log.id }}</th>
+                        <td>{{ log.created }}</td>
+                        <td>{{ log.method }}</td>
+                        <td>{{ log.status_code }}</td>
+                        <td>{{ log.path }}</td>
+                        <td>{{ log.time }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info" role="alert">
+            Table is empty
+        </div>
+    {% endif %}
+
+
+
+{% endblock content %}

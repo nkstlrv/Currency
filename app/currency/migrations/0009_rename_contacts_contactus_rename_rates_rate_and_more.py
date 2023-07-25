@@ -4,22 +4,21 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('currency', '0008_rename_source_sources'),
+        ("currency", "0008_rename_source_sources"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Contacts',
-            new_name='ContactUs',
+            old_name="Contacts",
+            new_name="ContactUs",
         ),
         migrations.RenameModel(
-            old_name='Rates',
-            new_name='Rate',
+            old_name="Rates",
+            new_name="Rate",
         ),
         migrations.RenameModel(
-            old_name='Sources',
-            new_name='Source',
+            old_name="Sources",
+            new_name="Source",
         ),
     ]

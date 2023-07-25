@@ -7,6 +7,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
@@ -53,6 +55,11 @@
                         </li>
                         <li><a class="dropdown-item" href={% url 'source_create' %}>Add Source</a></li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link silent" aria-current="page" href="{% url 'middlewarelog_list' %}">
+                        Middleware Logs</a>
                 </li>
                
             </ul>
