@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-# from django.contrib.auth import get_user_model
-# from django.contrib.auth.hashers import check_password
-# from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import get_user_model
 
 
 class PasswordResetForm(forms.Form):
@@ -45,4 +43,33 @@ class PasswordResetForm(forms.Form):
 
 
 class SignUpForm(forms.ModelForm):
-    pass
+    
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
+    
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'email',
+            'password1',
+            'password2',
+        )
+        
+    def clean(self):
+        clened_data = super().clean()
+        
+        if not self.errors:
+            if clened_data['password1'] != clened_data['password2']:
+                raise forms.ValidationError('Passwords do not match')
+        
+        return clened_data
+    
+    def save(self, commit = True):
+        instance = super().save(commit=False)
+        
+        instance.set_password(self.cleaned_data['password1'])
+        instance.is_active = False
+        
+        instance.save()
+        return instance
+    
