@@ -44,12 +44,11 @@ class PasswordResetForm(forms.Form):
         user.save()
 
 
-
 class SignUpForm(forms.ModelForm):
-    
+
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
-    
+
     class Meta:
         model = get_user_model()
         fields = (
@@ -57,43 +56,38 @@ class SignUpForm(forms.ModelForm):
             'password1',
             'password2',
         )
-        
+
     def clean(self):
         clened_data = super().clean()
-        
+
         if not self.errors:
             if clened_data['password1'] != clened_data['password2']:
                 raise forms.ValidationError('Passwords do not match')
-        
+
         return clened_data
-    
-    def save(self, commit = True):
+
+    def save(self, commit=True):
         instance = super().save(commit=False)
-        
+
         instance.set_password(self.cleaned_data['password1'])
         instance.is_active = False
-        
+
         instance.save()
         self._send_mail()
         return instance
-    
+
     def _send_mail(self):
-        
+
         activate_path = reverse('activate', args=(self.instance.username,))
-        
         subject = 'Confirm Registration'
         body = f"""
             {settings.HTTP_PROTOCOL}://{settings.DOMAIN}{activate_path}
         """
-        
+
         send_mail(
-            
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [self.instance.email],
             fail_silently=False
         )
-        
-        
-        
