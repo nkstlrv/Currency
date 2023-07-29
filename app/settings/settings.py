@@ -149,3 +149,6 @@ EMAIL_HOST_PASSWORD = os.getenv("PASSWORD")
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
+
+
+AUTH_USER_MODEL = 'authentication.User'
