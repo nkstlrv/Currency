@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class PasswordResetForm(forms.Form):
@@ -71,5 +73,26 @@ class SignUpForm(forms.ModelForm):
         instance.is_active = False
         
         instance.save()
+        self._send_mail()
         return instance
     
+    def _send_mail(self):
+        
+        subject = 'Confirm Registration'
+        body = f"""
+        
+            
+        
+        """
+        
+        send_mail(
+            
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [self.instanc.email],
+            fail_silently=False
+        )
+        
+        
+        
