@@ -65,6 +65,6 @@ class UserActivateView(RedirectView):
         
         if user is not None:
             user.is_active = True
-            user.save()
+            user.save(update_fields=['is_active'])
         
         return super().get_redirect_url(*args, **kwargs)

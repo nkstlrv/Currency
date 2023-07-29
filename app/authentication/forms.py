@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
+from django.urls import reverse
 
 
 class PasswordResetForm(forms.Form):
@@ -78,11 +79,11 @@ class SignUpForm(forms.ModelForm):
     
     def _send_mail(self):
         
+        activate_path = reverse('activate', args=(self.instance.username,))
+        
         subject = 'Confirm Registration'
         body = f"""
-        
-            
-        
+            {settings.HTTP_PROTOCOL}://{settings.DOMAIN}{activate_path}
         """
         
         send_mail(
@@ -90,7 +91,7 @@ class SignUpForm(forms.ModelForm):
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
-            [self.instanc.email],
+            [self.instance.email],
             fail_silently=False
         )
         
