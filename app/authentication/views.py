@@ -1,9 +1,9 @@
 # from django.http import HttpResponse
 # from django.shortcuts import render
 from django.contrib.auth import get_user_model
-from django.views.generic import UpdateView, FormView
+from django.views.generic import UpdateView, FormView, CreateView
 from django.urls import reverse_lazy
-from .forms import PasswordResetForm
+from .forms import PasswordResetForm, SignUpForm
 from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
@@ -45,3 +45,10 @@ class PasswordChangeView(PasswordChangeView, LoginRequiredMixin):
         response = super().form_valid(form)
         messages.success(self.request, 'Successful password change')
         return response
+
+
+class SignUpView(CreateView):
+    queryset = get_user_model().objects.all()
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+    form_class = SignUpForm

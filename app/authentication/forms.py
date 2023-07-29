@@ -41,3 +41,8 @@ class PasswordResetForm(forms.Form):
         user = User.objects.get(email=email)
         user.set_password(password)
         user.save()
+
+
+
+class SignUpForm(forms.ModelForm):
+    pass
