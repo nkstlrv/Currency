@@ -61,7 +61,7 @@ class UserActivateView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         
         username = str(kwargs.pop('username'))
-        user = get_user_model().objects.filter(username=username).first()
+        user = get_user_model().objects.filter(username=username).only('id').first()
         
         if user is not None:
             user.is_active = True
