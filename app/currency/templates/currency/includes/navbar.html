@@ -80,7 +80,7 @@
         
                         <div class="dropdown show">
                             <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {{user.username}}
+                              {{user.email}}
                             </a>
                           
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -99,7 +99,7 @@
                 <a href="{% url 'login' %}" type="button" class="btn btn-primary"
                    style="margin-right: 10px">
                     Log In</a>
-                <a type="button" class="btn btn-outline-primary">Sign Up</a>
+                <a type="button" href="{% url 'signup' %}" class="btn btn-outline-primary">Sign Up</a>
 
                 {% endif %}
             </div>
