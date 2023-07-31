@@ -20,7 +20,7 @@ class Rate(models.Model):
     )
 
     created = models.DateTimeField(auto_now_add=True)
-    source = models.ForeignKey("currency.Source", on_delete=models.CASCADE, related_name='rate')
+    source = models.ForeignKey("currency.Source", on_delete=models.CASCADE, related_name='rates')
 
     def __str__(self):
         return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
