@@ -19,8 +19,8 @@ class Rate(models.Model):
         default=RateCurrencyChoices.USD,
     )
 
-    source = models.CharField(max_length=255, default=None, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    source = models.ForeignKey("currency.Source", on_delete=models.CASCADE, related_name='rates')
 
     def __str__(self):
         return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
