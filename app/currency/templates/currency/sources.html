@@ -28,9 +28,8 @@
     </thead>
     <tbody>
       {% for source in sources %}
-
       <tr>
-        <th>{{source.logo}}</th>
+        <th><img src="{{ source.logo.url }}" alt="logo" width="40px"></th>
         <td>{{source.name}}</td>
         <td>{{source.url}}</td>
         {% if user.is_authenticated %}
