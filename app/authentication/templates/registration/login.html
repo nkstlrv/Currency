@@ -1,20 +1,22 @@
 {%extends 'currency/base.html'%}
+{% load crispy_forms_tags %}
 
 {%block title%}Login{%endblock title%}
 
 {% block content %}
 
 <div>
-    <h1>Login Form</h1>
+    <h2>Login Form</h2>
 </div>
 
-<div>
+<div style="margin-top: 30px">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-outline-success">Login</button>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-outline-secondary">Login</button>
     </form>
 </div><br>
-<a href="{% url 'password-reset' %}">Forgot Password?</a><br>
-<a href="{% url 'signup' %}">Do not nave and Account?</a>
+    <a href="{% url 'signup' %}">Do not nave and Account?</a>
+    <p></p>
+    <a href="{% url 'password-reset' %}">Forgot Password?</a>
 {%endblock content%}

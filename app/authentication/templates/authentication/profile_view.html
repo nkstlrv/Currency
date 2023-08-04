@@ -1,5 +1,5 @@
 {%extends 'currency/base.html'%}
-
+{% load crispy_forms_tags %}
 {%block title%}Profile{%endblock title%}
 
 {% block content %}
@@ -11,7 +11,7 @@
 <div>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit" class="btn btn-outline-success btn-lg">Submit</button>
     </form>
 </div>

@@ -44,7 +44,12 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = [
     "django_extensions",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 INTERNAL_APPS = [
     "currency",
