@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse_lazy
@@ -10,6 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+
 # from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -19,11 +19,11 @@ class HomeTemplateView(TemplateView):
 
     # Added instant redirection to rates table page
     def get(self, request, *args, **kwargs):
-        return redirect('rates_table')
+        return redirect("rates_table")
 
 
 class RatesListView(ListView):
-    queryset = models.Rate.objects.all().select_related('source')
+    queryset = models.Rate.objects.all().select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
 

@@ -4,9 +4,10 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from django.urls import reverse_lazy
+
+# from crispy_forms.helper import FormHelper
+# from crispy_forms.layout import Submit
+# from django.urls import reverse_lazy
 
 
 class PasswordResetForm(forms.Form):
