@@ -5,6 +5,10 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
 
+def source_logo_path(instance, filename):
+    return "user_{0)/{1}".format(instance.user.id, filename)
+
+
 class Rate(models.Model):
     buy = models.DecimalField(
         max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)]
@@ -45,7 +49,7 @@ class Source(models.Model):
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=255)
     logo = models.FileField(
-        default=None, null=True, blank=True, upload_to="logos/%Y/%m/%d/"
+        default=None, null=True, blank=True, upload_to=source_logo_path
     )
 
     def __str__(self):
