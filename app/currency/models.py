@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 def source_logo_path(instance, filename):
-    return f"logos/{instance.name}/{filename}/"
+    return f"source/logos/{instance.name}/{filename}"
 
 
 class Rate(models.Model):

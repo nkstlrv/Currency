@@ -1,63 +1,71 @@
-{%extends 'currency/base.html'%} 
-{% load static %} 
+{% extends 'currency/base.html' %}
+{% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'currency/css/table.css' %}" />
-{% endblock%} 
+    <link rel="stylesheet" href="{% static 'currency/css/table.css' %}"/>
+{% endblock %}
 
-{%block title%}Sources Table{%endblock title%}
+{% block title %}Sources Table{% endblock title %}
 
 {% block content %}
 
-<div class="header">
-  <h1>Sources Table</h1>
-</div>
+    <div class="header">
+        <h1>Sources Table</h1>
+    </div>
 
-{% if sources|length > 0 %}
+    {% if sources|length > 0 %}
 
-<div class="table-div">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Logo</th>
-        <th scope="col">Source Name</th>
-        <th scope="col">Source URL</th>
-        {% if user.is_authenticated %}
-        <th scope="col">Action</th>
-        {% endif %} 
-      </tr>
-    </thead>
-    <tbody>
-      {% for source in sources %}
-      <tr>
-        <th><img src="{{ source.logo.url }}" alt="logo" width="40px"></th>
-        <td>{{source.name}}</td>
-        <td>{{source.url}}</td>
-        {% if user.is_authenticated %}
-        <td>
-            <div>
-          <a class="edit" href="{% url 'source_update' source.id%}">Edit</a>
-          <base>|</base>
-          <a class="delete" href="{% url 'source_delete' source.id%}">Delete</a>
+        <div class="table-div">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Source Name</th>
+                    <th scope="col">Source URL</th>
+                    {% if user.is_authenticated %}
+                        <th scope="col">Action</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for source in sources %}
+                    <tr>
+                        {% if source.logo %}
+                            <th><img src="{{ source.logo.url }}" alt="logo" width="40px"></th>
+                        {% else %}
+                            <th><img src="{% static 'currency/images/default_logo.png' %}" alt="logo" width="40px"></th>
+                        {% endif %}
+
+                        <td>{{ source.name }}</td>
+                        <td>{{ source.url }}</td>
+                        {% if user.is_authenticated %}
+                            <td>
+                                <div>
+                                    <a class="edit" href="{% url 'source_update' source.id %}">Edit</a>
+                                    <base>
+                                    |</base>
+                                    <a class="delete" href="{% url 'source_delete' source.id %}">Delete</a>
+                                </div>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
-        </td>
-        {% endif %} 
-      </tr>
 
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    {% else %}
 
-{% else %}
+        <div class="alert alert-info" role="alert">Table is empty</div>
 
-<div class="alert alert-info" role="alert">Table is empty</div>
+    {% endif %}
 
-{% endif %} 
+    {% if user.is_authenticated %}
+        <a href="{% url 'source_create' %}">
+            <button type="button" id="new-contact" class="btn btn-primary btn-lg">
+                Add Source
+            </button>
+        </a>
+    {% endif %}
 
-{% if user.is_authenticated %}
-<a href="{% url 'source_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
-    Add Source
-</button></a>
-{% endif %} 
-
-{%endblock content%}
+{% endblock content %}
