@@ -16,7 +16,6 @@ class ProgileView(UpdateView, LoginRequiredMixin):
         'first_name',
         'last_name',
         'email',
-        'username',
 
         # This is temporary field; will be removed when registration will be availale
         'is_superuser',
