@@ -9,14 +9,14 @@
 {% block content %}
 
 <div class="header">
-  <h1>Add Source</h1>
+  <h1>Add new Source</h1>
 </div>
 
 <div class="form-div">
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-outline-success btn-lg">Submit</button>
+    <button type="submit" class="btn btn-outline-success btn-lg">Create</button>
 </form>
 </div>
 {%endblock content%}

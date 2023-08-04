@@ -12,8 +12,9 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-outline-success">Submit</button>
+        <button type="submit" class="btn btn-outline-success">Login</button>
     </form>
 </div><br>
-<a href="{% url 'password-reset' %}">Forgot Password?</a>
+<a href="{% url 'password-reset' %}">Forgot Password?</a><br>
+<a href="{% url 'signup' %}">Do not nave and Account?</a>
 {%endblock content%}
