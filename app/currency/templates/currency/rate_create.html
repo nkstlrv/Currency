@@ -1,4 +1,5 @@
 {%extends 'currency/base.html'%}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
@@ -10,14 +11,14 @@
 
 
 <div class="header">
-  <h1>Add new Rate</h1>
+  <h2>Add new Rate</h2>
 </div>
 
 <div class="form-div">
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-outline-success btn-lg">Create</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-secondary btn-lg">Create</button>
 </form>
 </div>
 {%endblock content%}
