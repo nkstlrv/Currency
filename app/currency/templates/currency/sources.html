@@ -19,6 +19,7 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
+        <th scope="col">Logo</th>
         <th scope="col">Source Name</th>
         <th scope="col">Source URL</th>
         {% if user.is_authenticated %}
@@ -31,6 +32,7 @@
 
       <tr>
         <th scope="row">{{source.id}}</th>
+        <th scope="row">{{source.logo}}</th>
         <td>{{source.name}}</td>
         <td>{{source.url}}</td>
         {% if user.is_authenticated %}

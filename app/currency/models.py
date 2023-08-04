@@ -44,7 +44,7 @@ class ContactUs(models.Model):
 class Source(models.Model):
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=255)
-    logo = models.FileField(default=None, null=True)
+    logo = models.FileField(default=None, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} | {self.url}"
