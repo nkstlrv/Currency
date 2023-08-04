@@ -70,9 +70,7 @@ ROOT_URLCONF = "settings.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / 'templates'
-        ],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -131,13 +129,16 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR.parent / "var" / "media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'django@mail.com'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "django@mail.com"
 
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 # EMAIL_HOST = "smtp.gmail.com"
@@ -147,11 +148,11 @@ DEFAULT_FROM_EMAIL = 'django@mail.com'
 # EMAIL_HOST_USER = os.getenv("EMAIL")
 # EMAIL_HOST_PASSWORD = os.getenv("PASSWORD")
 
-LOGIN_REDIRECT_URL = reverse_lazy('home')
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy("home")
+LOGIN_URL = reverse_lazy("login")
+LOGOUT_REDIRECT_URL = reverse_lazy("home")
 
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = "authentication.User"
 
-DOMAIN = '127.0.0.1:8000'
-HTTP_PROTOCOL = 'http'
+DOMAIN = "127.0.0.1:8000"
+HTTP_PROTOCOL = "http"
