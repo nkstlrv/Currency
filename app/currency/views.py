@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -15,6 +16,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomeTemplateView(TemplateView):
     template_name = "currency/index.html"
+
+    # Added instant redirection to rates table page
+    def get(self, request, *args, **kwargs):
+        return redirect('rates_table')
 
 
 class RatesListView(ListView):
