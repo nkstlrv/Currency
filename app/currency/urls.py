@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from currency import views
 
 urlpatterns = [
@@ -37,3 +39,6 @@ urlpatterns = [
     path("rates/table/", views.RatesListView.as_view(), name="rates_table"),
     path("", views.HomeTemplateView.as_view(), name="home"),
 ]
+
+# added for media files handling
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
