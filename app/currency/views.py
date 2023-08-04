@@ -125,37 +125,3 @@ class MiddlewareLogListView(ListView, LoginRequiredMixin):
     model = models.RequestResponseLog
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
-
-
-def rates_json(request):
-    data = {}
-
-    rates = models.Rate.objects.all()
-    if rates:
-        for ind, rate in enumerate(rates, start=1):
-            data[ind] = {
-                "id": rate.id,
-                "currency": rate.currency,
-                "buy": rate.buy,
-                "sell": rate.sell,
-                "source": rate.source,
-                "created": rate.created,
-            }
-
-    return JsonResponse(data)
-
-
-def contacts_json(request):
-    data = {}
-
-    contacts = models.ContactUs.objects.all()
-    if contacts:
-        for ind, contact in enumerate(contacts, start=1):
-            data[ind] = {
-                "id": contact.id,
-                "email_from": contact.email_from,
-                "subject": contact.subject,
-                "message": contact.message,
-            }
-
-    return JsonResponse(data)

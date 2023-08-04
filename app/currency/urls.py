@@ -35,7 +35,5 @@ urlpatterns = [
     path("rates/update/<int:pk>/", views.RateUpdateView.as_view(), name="rate_update"),
     path("rates/create/", views.RateCreateView.as_view(), name="rate_create"),
     path("rates/table/", views.RatesListView.as_view(), name="rates_table"),
-    path("contacts/json/", views.contacts_json, name="contacts_json"),
-    path("rates/json/", views.rates_json, name="rates_json"),
     path("", views.HomeTemplateView.as_view(), name="home"),
 ]
