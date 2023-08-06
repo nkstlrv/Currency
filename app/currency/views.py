@@ -1,7 +1,7 @@
-from django.http import JsonResponse
 from currency import models
 from currency.forms import ContactsForm, RatesForm, SourcesForm
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -9,6 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+
 # from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -16,9 +17,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class HomeTemplateView(TemplateView):
     template_name = "currency/index.html"
 
+    # Added instant redirection to rates table page
+    def get(self, request, *args, **kwargs):
+        return redirect("rates_table")
+
 
 class RatesListView(ListView):
-    queryset = models.Rate.objects.all().select_related('source')
+    queryset = models.Rate.objects.all().select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
 
@@ -120,37 +125,3 @@ class MiddlewareLogListView(ListView, LoginRequiredMixin):
     model = models.RequestResponseLog
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
-
-
-def rates_json(request):
-    data = {}
-
-    rates = models.Rate.objects.all()
-    if rates:
-        for ind, rate in enumerate(rates, start=1):
-            data[ind] = {
-                "id": rate.id,
-                "currency": rate.currency,
-                "buy": rate.buy,
-                "sell": rate.sell,
-                "source": rate.source,
-                "created": rate.created,
-            }
-
-    return JsonResponse(data)
-
-
-def contacts_json(request):
-    data = {}
-
-    contacts = models.ContactUs.objects.all()
-    if contacts:
-        for ind, contact in enumerate(contacts, start=1):
-            data[ind] = {
-                "id": contact.id,
-                "email_from": contact.email_from,
-                "subject": contact.subject,
-                "message": contact.message,
-            }
-
-    return JsonResponse(data)

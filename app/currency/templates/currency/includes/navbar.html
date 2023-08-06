@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Currency</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Currency </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,100 +8,72 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 
-
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Contacts
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'contacts_json' %}">JSON</a></li>
-                        <li><a class="dropdown-item" href="{% url 'contacts_table' %}">Table</a></li>
-                        {% if user.is_authenticated %}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'contact_create' %}">Add Contact</a></li>
-                        {% endif %}
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link silent" aria-current="page" href="{% url 'rates_table' %}">Rates</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Rates
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'rates_json' %}">JSON</a></li>
-                        <li><a class="dropdown-item" href="{% url 'rates_table' %}">Table</a></li>
-                        {% if user.is_authenticated %}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href={% url 'rate_create' %}>Add Rate</a></li>
-                        {% endif %}
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link silent" aria-current="page" href="{% url 'sources_table' %}">Sources</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Sources
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'sources_table' %}">Table</a></li>
-                        {% if user.is_authenticated %}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href={% url 'source_create' %}>Add Source</a></li>
-                        {% endif %}
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link silent" aria-current="page" href="{% url 'contact_create' %}">Contact Us</a>
                 </li>
 
                 {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Admin panel
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'rate_create' %}">Create Rate</a></li>
+                            <li><a class="dropdown-item" href="{% url 'source_create' %}">Create Source</a></li>
+                            <li><a class="dropdown-item" href="{% url 'contacts_table' %}">Show Contacts</a></li>
+                            <li><a class="dropdown-item" href="{% url 'middlewarelog_list' %}">Middleware Logs</a></li>
 
-                <li class="nav-item">
-                    <a class="nav-link silent" aria-current="page" href="{% url 'middlewarelog_list' %}">
-                        Middleware Logs</a>
-                </li>
 
-               {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+
 
             </ul>
             <div style="margin: 5px;">
                 {% if user.is_authenticated %}
 
-                <div class="collapse navbar-collapse" id="navbarScroll">
-        
-                        <div class="dropdown show">
-                            <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {{user.email}}
-                            </a>
-                          
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile View</a>
-                              <a class="dropdown-item" href="{% url 'password-change' user.id %}">Change Password</a>
-                            
-                            </div>
-                          </div>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
 
-                <a href="{% url 'logout' %}" type="button" class="btn btn--outline-secondary"
-                   style="margin-right: 10px">
-                    Log Out</a>
+                    <div class="dropdown show">
+                        <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.email }}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'profile' user.id %}">Profile View</a>
+                            <a class="dropdown-item" href="{% url 'password-change' user.id %}">Change Password</a>
+
+                        </div>
+                    </div>
+
+                    <a href="{% url 'logout' %}" type="button" class="btn btn--outline-secondary"
+                       style="margin-right: 10px">
+                        Log Out</a>
 
                 {% else %}
 
-                <a href="{% url 'login' %}" type="button" class="btn btn-primary"
-                   style="margin-right: 10px">
-                    Log In</a>
-                <a type="button" href="{% url 'signup' %}" class="btn btn-outline-primary">Sign Up</a>
+                    <a href="{% url 'login' %}" type="button" class="btn btn-primary"
+                       style="margin-right: 10px">
+                        Log In</a>
+                    <a type="button" href="{% url 'signup' %}" class="btn btn-outline-primary">Sign Up</a>
 
                 {% endif %}
+                </div>
             </div>
         </div>
     </div>

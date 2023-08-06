@@ -2,17 +2,16 @@
 {% load static %} 
 {% block css %}
 <link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
-{% endblock%} 
-{% load crispy_forms_tags %} 
+{% endblock%}
 
 {%block title%}Delete Source{%endblock title%}
 
 {% block content %}
 
 <div class="header">
-  <h1>Are you sure you want to DELETE Source <br> 
+  <h2>Are you sure you want to DELETE Source <br>
     with parameters: name: <b>{{source.name}}</b>; url:
-    <b>{{source.url}}</b>?</h1>
+    <b>{{source.url}}</b>?</h2>
 </div>
 
 <div class="form-delete">

@@ -1,22 +1,23 @@
 {%extends 'currency/base.html'%}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
 {% endblock%}
 
-{%block title%}Add Contact{%endblock title%}
+{%block title%}Contact Us{%endblock title%}
 
 {% block content %}
 
 <div class="header">
-  <h1>Create Contact</h1>
+  <h2>Contact Customer Support</h2>
 </div>
 
 <div class="form-div">
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-outline-success btn-lg">Submit</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-secondary btn-lg">Contact Us</button>
 </form>
 </div>
 {%endblock content%}

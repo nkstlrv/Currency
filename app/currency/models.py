@@ -5,6 +5,10 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
 
+def source_logo_path(instance, filename):
+    return f"source/logos/{instance.name}/{filename}"
+
+
 class Rate(models.Model):
     buy = models.DecimalField(
         max_digits=8, decimal_places=2, default=0, validators=[MinValueValidator(0)]
@@ -20,7 +24,9 @@ class Rate(models.Model):
     )
 
     created = models.DateTimeField(auto_now_add=True)
-    source = models.ForeignKey("currency.Source", on_delete=models.CASCADE, related_name='rates')
+    source = models.ForeignKey(
+        "currency.Source", on_delete=models.CASCADE, related_name="rates"
+    )
 
     def __str__(self):
         return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
@@ -42,6 +48,9 @@ class ContactUs(models.Model):
 class Source(models.Model):
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=255)
+    logo = models.FileField(
+        default=None, null=True, blank=True, upload_to=source_logo_path
+    )
 
     def __str__(self):
         return f"{self.name} | {self.url}"

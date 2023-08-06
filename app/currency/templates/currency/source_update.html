@@ -1,4 +1,5 @@
-{%extends 'currency/base.html'%} 
+{%extends 'currency/base.html'%}
+{% load crispy_forms_tags %}
 {% load static %} 
 {% block css %}
 <link rel="stylesheet" href="{% static 'currency/css/form.css' %}" />
@@ -9,13 +10,13 @@
 {% block content %}
 
 <div class="header">
-  <h1>Edit Source with id ({{id}})</h1>
+  <h2>Edit Source with id ({{id}})</h2>
 </div>
 
 <div class="form-div">
-  <form method="post">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit" class="btn btn-outline-success btn-lg">Edit</button>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-secondary btn-lg">Submit</button>
   </form>
 </div>
 

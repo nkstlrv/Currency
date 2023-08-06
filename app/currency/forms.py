@@ -29,7 +29,7 @@ class RatesForm(forms.ModelForm):
 class SourcesForm(forms.ModelForm):
     class Meta:
         model = Source
-        fields = ("name", "url")
+        fields = ("name", "url", "logo")
         labels = {"name": "Source Name", "url": "Source URL"}
         widgets = {
             "email_from": forms.TextInput(attrs={"placeholder": "Enter source name"}),
