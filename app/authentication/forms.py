@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
@@ -22,11 +22,8 @@ class PasswordResetForm(forms.Form):
     )
 
     def clean_email(self):
-        email = self.cleaned_data.get("email")
-        try:
-            user = User.objects.get(email=email)
-            user
-        except User.DoesNotExist:
+        email = self.cleaned_data.get("email").lower()
+        if not User.objects.filter(email=email).exists():
             raise forms.ValidationError("User with this email does not exist.")
         return email
 
