@@ -29,7 +29,7 @@ class Rate(models.Model):
     )
 
     def __str__(self):
-        return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
+        return f"{self.currency}"
 
 
 class ContactUs(models.Model):
@@ -54,7 +54,7 @@ class Source(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name} | {self.url}"
+        return f"{self.name}"
 
 
 class RequestResponseLog(models.Model):
