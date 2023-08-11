@@ -9,9 +9,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-
-# from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .tasks import send_contactus_email
 
 
 class HomeTemplateView(TemplateView):
@@ -60,26 +59,12 @@ class ContactCreateView(CreateView, LoginRequiredMixin):
     template_name = "currency/contact_create.html"
     success_url = reverse_lazy("contacts_table")
 
-    # def form_valid(self, form):
-    #     cleaned_data = form.cleaned_data
+    def form_valid(self, form):
+        cleaned_data = form.cleaned_data
 
-    #     email_body = f"""
-    #     From: {cleaned_data['email_from']}
-    #     Subject: {cleaned_data['subject']}
-    #     Message: {cleaned_data['message']}
-    #     """
-
-    #     from django.conf import settings
-
-    #     send_mail(
-    #         "Contact Us",
-    #         email_body,
-    #         settings.EMAIL_HOST_USER,
-    #         [settings.EMAIL_HOST_USER],
-    #         fail_silently=False,
-    #     )
-
-    #     return super().form_valid(form)
+        # Sending email to Customer support
+        send_contactus_email.delay(cleaned_data)
+        return super().form_valid(form)
 
 
 class ContactUpdateView(UpdateView, LoginRequiredMixin):
