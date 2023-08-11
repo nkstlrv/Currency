@@ -3,7 +3,7 @@ import time
 from django.core.mail import send_mail
 import logging
 import requests
-from currency.consts import PRIVATBANK_DEV_NAME
+from currency.consts import PRIVATBANK_DEV_NAME, MONOBANK_DEV_NAME
 from currency.choices import RateCurrencyChoices
 from currency.utils import to_2_places_decimal
 
@@ -97,6 +97,58 @@ def get_currency_privatbank():
             logging.info("NEW PRIVATBANK RATE")
 
 
+@shared_task
+def get_currency_monobank():
+    logging.info("PARSING MONOBANK")
+    from currency.models import Rate, Source
+
+    monobank_api_url = "https://api.monobank.ua/bank/currency"
+
+    source = Source.objects.filter(dev_name=MONOBANK_DEV_NAME).first()
+    if source is None:
+        Source.objects.create(
+            dev_name=MONOBANK_DEV_NAME, name="MonoBank", url=monobank_api_url
+        )
+        logging.info("NEW MONOBANK SOURCE")
+
+    response = requests.get(monobank_api_url)
+    response.raise_for_status()
+
+    rates = response.json()[0:2]  # only us dollar and euro have buy/sell
+
+    available_currencies = {
+        840: RateCurrencyChoices.USD,
+        978: RateCurrencyChoices.EUR,
+    }
+
+    for rate in rates:
+        currency = rate["currencyCodeA"]
+        buy = to_2_places_decimal(rate["rateBuy"])
+        sell = to_2_places_decimal(rate["rateSell"])
+
+        if currency not in available_currencies.keys():
+            continue
+
+        last_rate = (
+            Rate.objects.filter(source=source, currency=available_currencies[currency])
+            .order_by("-created")
+            .first()
+        )
+
+        if last_rate is None or last_rate.buy != buy or last_rate.sell != sell:
+            Rate.objects.create(
+                currency=available_currencies[currency],
+                buy=buy,
+                sell=sell,
+                source=source,
+            )
+            logging.info("NEW MONOBANK RATE")
+
+
+def mono_api():
+    return requests.get("https://api.monobank.ua/bank/currency").json()
+
+
 if __name__ == "__main__":
-    # get_currency_privatbank()
+    print(mono_api()[0:2])
     ...
