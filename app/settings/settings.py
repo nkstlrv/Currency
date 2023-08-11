@@ -171,7 +171,7 @@ CELERY_BROKER_URL = "amqp://localhost"  # default port -> 5672; password -> gues
 
 CELERY_BEAT_SCHEDULE = {
     "debug": {
-        "task": "currency.tasks.demo_task",
+        "task": "currency.tasks.get_currency_privatbank",
         "schedule": crontab(minute="*/1"),
     }
 }

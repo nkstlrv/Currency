@@ -7,7 +7,7 @@ from currency.consts import PRIVATBANK_DEV_NAME
 from currency.choices import RateCurrencyChoices
 from currency.utils import to_2_places_decimal
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 @shared_task
@@ -51,6 +51,7 @@ def send_signup_verify_email(subject, body, from_email, recipient: str):
 
 @shared_task
 def get_currency_privatbank():
+    logging.info("PARSING PRIVATBANK")
     from currency.models import Rate, Source
 
     privatbank_api_url = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=11"
@@ -60,7 +61,7 @@ def get_currency_privatbank():
         Source.objects.create(
             dev_name=PRIVATBANK_DEV_NAME, name="PrivatBank", url=privatbank_api_url
         )
-        logging.info("New PRIVATBANK Source created")
+        logging.info("NEW PRIVATBANK SOURCE")
 
     response = requests.get(privatbank_api_url)
     response.raise_for_status()
@@ -93,7 +94,7 @@ def get_currency_privatbank():
                 sell=sell,
                 source=source,
             )
-            logging.info("New PRIVATBANK Rate created")
+            logging.info("NEW PRIVATBANK RATE")
 
 
 if __name__ == "__main__":
