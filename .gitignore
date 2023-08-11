@@ -10,3 +10,4 @@ idea
 .idea
 currency_db.session.sql
 .vscode
+/app/celerybeat-schedule
