@@ -10,7 +10,7 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .tasks import send_contactus_email
+from .tasks import send_email_contact_us
 
 
 class HomeTemplateView(TemplateView):
@@ -63,7 +63,7 @@ class ContactCreateView(CreateView, LoginRequiredMixin):
         cleaned_data = form.cleaned_data
 
         # Sending email to Customer support
-        send_contactus_email.delay(cleaned_data)
+        send_email_contact_us.delay(cleaned_data)
         return super().form_valid(form)
 
 

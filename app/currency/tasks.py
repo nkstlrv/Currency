@@ -14,7 +14,7 @@ def demo_task(number_of_times: int):
 
 
 @shared_task
-def send_contactus_email(cleaned_data: dict):
+def send_email_contact_us(cleaned_data: dict):
     email_body = f"""
             From: {cleaned_data['email_from']}
             Subject: {cleaned_data['subject']}
