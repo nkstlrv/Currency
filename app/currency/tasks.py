@@ -1,12 +1,15 @@
 from celery import shared_task
 import time
 from django.core.mail import send_mail
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
 @shared_task
-def demo_task():
-    for i in range(10):
-        print("TESTING WORKER")
+def demo_task(number_of_times: int):
+    for i in range(number_of_times):
+        logging.info("TESTING WORKER")
         time.sleep(0.1)
 
 
