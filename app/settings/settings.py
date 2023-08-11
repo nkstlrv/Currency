@@ -140,6 +140,10 @@ MEDIA_ROOT = BASE_DIR.parent / "var" / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+DOMAIN = "127.0.0.1:8000"
+HTTP_PROTOCOL = "http"
+
+# Email engine configurations:
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -153,11 +157,13 @@ DEFAULT_FROM_EMAIL = "django@mail.com"
 # EMAIL_HOST_USER = os.getenv("EMAIL")
 # EMAIL_HOST_PASSWORD = os.getenv("PASSWORD")
 
+
+# Authentication configurations
 LOGIN_REDIRECT_URL = reverse_lazy("home")
 LOGIN_URL = reverse_lazy("login")
 LOGOUT_REDIRECT_URL = reverse_lazy("home")
-
 AUTH_USER_MODEL = "authentication.User"
 
-DOMAIN = "127.0.0.1:8000"
-HTTP_PROTOCOL = "http"
+
+# Celery configurations:
+CELERY_BROKER_URL = "amqp://localhost"  # default port -> 5672; password -> guest
