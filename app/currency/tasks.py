@@ -8,9 +8,10 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 @shared_task
 def demo_task():
-    for i in range(100):
-        logging.info("TESTING WORKER")
-        time.sleep(0.1)
+    for i in range(10):
+        logging.info(f"TESTING WORKER")
+        time.sleep(0.3)
+    return True
 
 
 @shared_task
