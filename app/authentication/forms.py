@@ -1,7 +1,7 @@
 from django import forms
 from .models import User
 from django.contrib.auth import get_user_model
-from django.core.mail import send_mail
+from currency.tasks import send_signup_verify_email
 from django.conf import settings
 from django.urls import reverse
 
@@ -83,10 +83,6 @@ class SignUpForm(forms.ModelForm):
             {settings.HTTP_PROTOCOL}://{settings.DOMAIN}{activate_path}
         """
 
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [self.instance.email],
-            fail_silently=False,
+        send_signup_verify_email.delay(
+            subject, body, settings.DEFAULT_FROM_EMAIL, self.instance.email
         )

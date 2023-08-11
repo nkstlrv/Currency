@@ -28,3 +28,14 @@ def send_contactus_email(cleaned_data: dict):
         fail_silently=False,
     )
     return True
+
+
+@shared_task
+def send_signup_verify_email(subject, body, from_email, recipient: str):
+    send_mail(
+        subject,
+        body,
+        from_email,
+        [recipient],
+        fail_silently=False,
+    )
