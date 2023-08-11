@@ -23,7 +23,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Currency</th>
                 <th scope="col">Buy</th>
                 <th scope="col">Sell</th>
@@ -39,7 +38,6 @@
             {% for rate in rates %}
 
             <tr>
-                <th scope="row">{{rate.id}}</th>
                 <td>{{rate.get_currency_display}}</td>
                 <td>{{rate.buy}}</td>
                 <td>{{rate.sell}}</td>

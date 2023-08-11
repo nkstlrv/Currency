@@ -22,7 +22,7 @@ class HomeTemplateView(TemplateView):
 
 
 class RatesListView(ListView):
-    queryset = models.Rate.objects.all().select_related("source")
+    queryset = models.Rate.objects.all().order_by("-id").select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
 
