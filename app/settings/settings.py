@@ -167,11 +167,19 @@ AUTH_USER_MODEL = "authentication.User"
 
 
 # Celery configurations:
-CELERY_BROKER_URL = "amqp://localhost"  # default port -> 5672; password -> guest
+CELERY_BROKER_URL = "amqp://localhost"  # default port -> 15672; password -> guest
 
 CELERY_BEAT_SCHEDULE = {
-    "debug": {
+    # "debug": {
+    #     "task": "currency.tasks.debug_task",
+    #     "schedule": crontab(minute="*/1"),
+    # },
+    "privat_parse": {
         "task": "currency.tasks.get_currency_privatbank",
-        "schedule": crontab(minute="*/1"),
-    }
+        "schedule": crontab(minute="*/5"),
+    },
+    "monobank_parse": {
+        "task": "currency.tasks.get_currency_monobank",
+        "schedule": crontab(minute="*/6"),
+    },
 }

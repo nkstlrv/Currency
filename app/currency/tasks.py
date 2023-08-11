@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 @shared_task
-def demo_task():
+def debug_task():
     for i in range(10):
         logging.info(f"TESTING WORKER")
         time.sleep(0.3)
