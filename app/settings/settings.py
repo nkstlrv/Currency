@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.urls import reverse_lazy
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -167,3 +168,10 @@ AUTH_USER_MODEL = "authentication.User"
 
 # Celery configurations:
 CELERY_BROKER_URL = "amqp://localhost"  # default port -> 5672; password -> guest
+
+CELERY_BEAT_SCHEDULE = {
+    "debug": {
+        "task": "currency.tasks.demo_task",
+        "schedule": crontab(minute="*/1"),
+    }
+}

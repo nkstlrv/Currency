@@ -7,8 +7,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 
 @shared_task
-def demo_task(number_of_times: int):
-    for i in range(number_of_times):
+def demo_task():
+    for i in range(100):
         logging.info("TESTING WORKER")
         time.sleep(0.1)
 
