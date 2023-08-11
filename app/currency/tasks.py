@@ -4,6 +4,8 @@ from django.core.mail import send_mail
 import logging
 import requests
 from currency.consts import PRIVATBANK_DEV_NAME
+from currency.choices import RateCurrencyChoices
+from currency.utils import to_2_places_decimal
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -65,26 +67,35 @@ def get_currency_privatbank():
 
     rates = response.json()
 
-    available_currencies = ("USD", "EUR")
+    available_currencies = {
+        "USD": RateCurrencyChoices.USD,
+        "EUR": RateCurrencyChoices.EUR,
+    }
 
     for rate in rates:
         currency = rate["ccy"]
-        buy = rate["buy"]
-        sell = rate["sale"]
+        buy = to_2_places_decimal(rate["buy"])
+        sell = to_2_places_decimal(rate["sale"])
 
-        if currency not in available_currencies:
+        if currency not in available_currencies.keys():
             continue
 
-        currency_iso_to_model_choices: dict = {"USD": 1, "EUR": 2}
-
-        Rate.objects.create(
-            currency=currency_iso_to_model_choices[currency],
-            buy=buy,
-            sell=sell,
-            source=source,
+        last_rate = (
+            Rate.objects.filter(source=source, currency=available_currencies[currency])
+            .order_by("-created")
+            .first()
         )
-        logging.info("New PRIVATBANK Rate created")
+
+        if last_rate is None or last_rate.buy != buy or last_rate.sell != sell:
+            Rate.objects.create(
+                currency=available_currencies[currency],
+                buy=buy,
+                sell=sell,
+                source=source,
+            )
+            logging.info("New PRIVATBANK Rate created")
 
 
 if __name__ == "__main__":
-    get_currency_privatbank()
+    # get_currency_privatbank()
+    ...
