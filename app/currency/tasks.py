@@ -81,7 +81,7 @@ def get_currency_privatbank():
             currency=currency_iso_to_model_choices[currency],
             buy=buy,
             sell=sell,
-            source=source.id,
+            source=source,
         )
         logging.info("New PRIVATBANK Rate created")
 
