@@ -11,6 +11,8 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import send_email_contact_us
+from django_filters.views import FilterView
+from .filters import RateFilter
 
 
 class HomeTemplateView(TemplateView):
@@ -21,11 +23,12 @@ class HomeTemplateView(TemplateView):
         return redirect("rates_table")
 
 
-class RatesListView(ListView):
+class RatesListView(FilterView):
     queryset = models.Rate.objects.all().order_by("-id").select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
     paginate_by = 10
+    filterset_class = RateFilter
 
 
 class RateCreateView(CreateView, LoginRequiredMixin):
