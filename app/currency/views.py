@@ -25,6 +25,7 @@ class RatesListView(ListView):
     queryset = models.Rate.objects.all().order_by("-id").select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
+    paginate_by = 10
 
 
 class RateCreateView(CreateView, LoginRequiredMixin):
@@ -51,6 +52,7 @@ class ContactsListView(ListView):
     model = models.ContactUs
     context_object_name = "contacts"
     template_name = "currency/contacts.html"
+    paginate_by = 10
 
 
 class ContactCreateView(CreateView, LoginRequiredMixin):
@@ -84,6 +86,7 @@ class SourcesListView(ListView):
     model = models.Source
     context_object_name = "sources"
     template_name = "currency/sources.html"
+    paginate_by = 10
 
 
 class SourceCreateView(CreateView, LoginRequiredMixin):
@@ -110,3 +113,4 @@ class MiddlewareLogListView(ListView, LoginRequiredMixin):
     model = models.RequestResponseLog
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
+    paginate_by = 10
