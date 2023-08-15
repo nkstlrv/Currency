@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 @shared_task
 def debug_task():
     for i in range(10):
-        logging.info(f"TESTING WORKER")
+        logging.info("TESTING WORKER")
         time.sleep(0.3)
     return True
 
@@ -150,5 +150,5 @@ def mono_api():
 
 
 if __name__ == "__main__":
-    print(mono_api()[0:2])
+    # print(mono_api()[0:2])
     ...
