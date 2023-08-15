@@ -9,3 +9,5 @@ django-crispy-forms
 Celery
 requests
 django-filter
+
+ipython
