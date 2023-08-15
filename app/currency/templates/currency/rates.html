@@ -39,7 +39,7 @@
                 {% for rate in rates %}
 
                     <tr>
-                    <td>{{ forloop.counter }}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ rate.get_currency_display }}</td>
                         <td>{{ rate.buy }}</td>
                         <td>{{ rate.sell }}</td>
@@ -83,6 +83,8 @@
             </button>
         </a>
     {% endif %}
+
+    {% include "currency/includes/pagination.html" %}
 
 
 {% endblock content %}

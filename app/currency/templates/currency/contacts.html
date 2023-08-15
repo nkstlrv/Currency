@@ -65,6 +65,8 @@
 <a href="{% url 'contact_create' %}"><button type="button" id="new-contact" class="btn btn-primary btn-lg">
     Contact Us
 </button></a>
-{% endif %} 
+{% endif %}
+
+    {% include "currency/includes/pagination.html" %}
 
 {%endblock content%}
