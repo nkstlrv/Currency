@@ -110,7 +110,7 @@ class SourceDeleteView(DeleteView, LoginRequiredMixin):
 
 
 class MiddlewareLogListView(ListView, LoginRequiredMixin):
-    model = models.RequestResponseLog
+    queryset = models.RequestResponseLog.objects.all().order_by("-id")
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
     paginate_by = 10
