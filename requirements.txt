@@ -6,3 +6,5 @@ flake8-print
 python-dotenv
 crispy-bootstrap5
 django-crispy-forms
+Celery
+requests

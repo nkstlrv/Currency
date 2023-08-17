@@ -29,7 +29,7 @@ class Rate(models.Model):
     )
 
     def __str__(self):
-        return f"For {self.currency} --> Buy: {self.buy} | Sell: {self.sell}"
+        return f"{self.currency}"
 
 
 class ContactUs(models.Model):
@@ -46,14 +46,15 @@ class ContactUs(models.Model):
 
 
 class Source(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=255)
+    dev_name = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     logo = models.FileField(
         default=None, null=True, blank=True, upload_to=source_logo_path
     )
 
     def __str__(self):
-        return f"{self.name} | {self.url}"
+        return f"{self.name}"
 
 
 class RequestResponseLog(models.Model):
