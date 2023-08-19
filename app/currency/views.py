@@ -12,7 +12,7 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import send_email_contact_us
 from django_filters.views import FilterView
-from .filters import RateFilter, SourceFilter
+from .filters import RateFilter, SourceFilter, ContactUsFilter
 
 # import re
 
@@ -65,11 +65,24 @@ class RateDeleteView(DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy("rates_table")
 
 
-class ContactsListView(ListView):
+class ContactsListView(FilterView):
     model = models.ContactUs
     context_object_name = "contacts"
     template_name = "currency/contacts.html"
     paginate_by = 10
+    filterset_class = ContactUsFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context
 
 
 class ContactCreateView(CreateView, LoginRequiredMixin):
