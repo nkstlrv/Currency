@@ -32,7 +32,7 @@ class PasswordResetView(FormView):
         return super().form_valid(form)
 
 
-class PasswordChangeView(PasswordChangeView, LoginRequiredMixin):
+class PasswordChangeViewCustom(PasswordChangeView, LoginRequiredMixin):
     form_class = PasswordChangeForm
     template_name = "authentication/password_change.html"
     success_url = reverse_lazy("home")

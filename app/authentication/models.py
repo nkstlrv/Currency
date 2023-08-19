@@ -17,4 +17,7 @@ class User(AbstractUser):
         if not self.username:
             self.username = str(uuid4())
 
+        # if self.email:
+        #     self.email = self.email.lower()
+
         super().save(*args, **kwargs)
