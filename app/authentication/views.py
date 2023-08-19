@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProgileView(UpdateView, LoginRequiredMixin):
+class ProfileView(UpdateView, LoginRequiredMixin):
     model = get_user_model()
     template_name = "authentication/profile_view.html"
     success_url = reverse_lazy("home")
@@ -16,7 +16,7 @@ class ProgileView(UpdateView, LoginRequiredMixin):
         "first_name",
         "last_name",
         "email",
-        # This is temporary field; will be removed when registration will be availale
+        # This is temporary field; will be removed when registration will be available
         "is_superuser",
     )
 
