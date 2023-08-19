@@ -9,15 +9,7 @@ class User(AbstractUser):
     Custom User model
     """
 
-    email = models.EmailField(_("email address"), unique=True)
+    phone_number = models.CharField(_("phone number"), max_length=15, unique=True)
+    email = models.EmailField(_("email address"), max_length=50, unique=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ()
-
-    def save(self, *args, **kwargs):
-        if not self.username:
-            self.username = str(uuid4())
-
-        # if self.email:
-        #     self.email = self.email.lower()
-
-        super().save(*args, **kwargs)
