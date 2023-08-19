@@ -7,3 +7,5 @@ class AuthenticationConfig(AppConfig):
 
     def ready(self):
         from . import receivers
+
+        receivers
