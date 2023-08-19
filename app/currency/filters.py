@@ -18,3 +18,9 @@ class ContactUsFilter(django_filters.FilterSet):
     class Meta:
         model = ContactUs
         fields = ("email_from", "subject")
+
+
+class LoggingFilter(django_filters.FilterSet):
+    class Meta:
+        model = RequestResponseLog
+        fields = ("method", "status_code", "time")

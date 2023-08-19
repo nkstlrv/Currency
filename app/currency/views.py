@@ -12,7 +12,7 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import send_email_contact_us
 from django_filters.views import FilterView
-from .filters import RateFilter, SourceFilter, ContactUsFilter
+from .filters import RateFilter, SourceFilter, ContactUsFilter, LoggingFilter
 
 # import re
 
@@ -158,3 +158,16 @@ class MiddlewareLogListView(ListView, LoginRequiredMixin):
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
     paginate_by = 10
+    filterset_class = LoggingFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context
