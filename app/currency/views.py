@@ -30,6 +30,15 @@ class RatesListView(FilterView):
     paginate_by = 10
     filterset_class = RateFilter
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+
+        return context
+
 
 class RateCreateView(CreateView, LoginRequiredMixin):
     model = models.Rate
