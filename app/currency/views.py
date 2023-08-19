@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import send_email_contact_us
 from django_filters.views import FilterView
 from .filters import RateFilter
+import re
 
 
 class HomeTemplateView(TemplateView):
@@ -36,6 +37,9 @@ class RatesListView(FilterView):
         context["filter_params"] = "&".join(
             f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
         )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
 
         return context
 
