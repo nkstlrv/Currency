@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from .models import User
 from uuid import uuid4
@@ -10,7 +10,7 @@ def user_lower_email(instance, *args, **kwargs):
         instance.email = instance.email.lower()
 
 
-@receiver(post_save, sender=User)
-def user_set_username(instance, created, *args, **kwargs):
-    if created and not instance.username:
+@receiver(pre_save, sender=User)
+def user_set_username(instance, *args, **kwargs):
+    if not instance.pk and not instance.username:
         instance.username = str(uuid4())
