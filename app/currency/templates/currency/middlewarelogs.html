@@ -1,6 +1,7 @@
 {% extends 'currency/base.html' %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'currency/css/table.css' %}">
@@ -16,7 +17,18 @@
         <h2>Middleware Logs Table</h2>
     </div>
 
+    <div class="col-12" style="text-align: left">
+        <h5>Filter:</h5>
+            <form method="get">
+                {{ filter.form|crispy }}
+                <button class="btn btn-outline-primary" type="submit">Filter</button>
+            </form>
+
     {% if logs|length > 0 %}
+
+
+
+        </div>
 
         <div class="table-div">
 
@@ -33,7 +45,7 @@
                 </thead>
                 <tbody>
 
-                {% for log in logs reversed %}
+                {% for log in logs %}
 
                     <tr>
                         <th scope="row">{{ log.id }}</th>
@@ -56,6 +68,7 @@
         </div>
     {% endif %}
 
+    {% include "currency/includes/pagination.html" %}
 
 
 {% endblock content %}

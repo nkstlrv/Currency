@@ -11,6 +11,10 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import send_email_contact_us
+from django_filters.views import FilterView
+from .filters import RateFilter, SourceFilter, ContactUsFilter, LoggingFilter
+
+# import re
 
 
 class HomeTemplateView(TemplateView):
@@ -21,10 +25,24 @@ class HomeTemplateView(TemplateView):
         return redirect("rates_table")
 
 
-class RatesListView(ListView):
+class RatesListView(FilterView):
     queryset = models.Rate.objects.all().order_by("-id").select_related("source")
     context_object_name = "rates"
     template_name = "currency/rates.html"
+    paginate_by = 10
+    filterset_class = RateFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context
 
 
 class RateCreateView(CreateView, LoginRequiredMixin):
@@ -47,10 +65,24 @@ class RateDeleteView(DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy("rates_table")
 
 
-class ContactsListView(ListView):
+class ContactsListView(FilterView):
     model = models.ContactUs
     context_object_name = "contacts"
     template_name = "currency/contacts.html"
+    paginate_by = 10
+    filterset_class = ContactUsFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context
 
 
 class ContactCreateView(CreateView, LoginRequiredMixin):
@@ -80,10 +112,25 @@ class ContactDeleteView(DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy("contacts_table")
 
 
-class SourcesListView(ListView):
-    model = models.Source
+class SourcesListView(FilterView):
+    # model = models.Source
+    queryset = models.Source.objects.all().order_by("id")
     context_object_name = "sources"
     template_name = "currency/sources.html"
+    paginate_by = 10
+    filterset_class = SourceFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context
 
 
 class SourceCreateView(CreateView, LoginRequiredMixin):
@@ -107,6 +154,20 @@ class SourceDeleteView(DeleteView, LoginRequiredMixin):
 
 
 class MiddlewareLogListView(ListView, LoginRequiredMixin):
-    model = models.RequestResponseLog
+    queryset = models.RequestResponseLog.objects.all().order_by("-id")
     context_object_name = "logs"
     template_name = "currency/middlewarelogs.html"
+    paginate_by = 10
+    filterset_class = LoggingFilter
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context["filter_params"] = "&".join(
+            f"{key}={value}" for key, value in self.request.GET.items() if key != "page"
+        )
+        # context["filter_params"] = re.sub(
+        #     r"(\?|&)page=(\d*)&*", "", string=self.request.GET.urlencode()
+        # )
+
+        return context

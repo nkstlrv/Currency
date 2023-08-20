@@ -114,7 +114,7 @@ def get_currency_monobank():
     response = requests.get(monobank_api_url)
     response.raise_for_status()
 
-    rates = response.json()[0:2]  # only us dollar and euro have buy/sell
+    rates = response.json()
 
     available_currencies = {
         840: RateCurrencyChoices.USD,
