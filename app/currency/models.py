@@ -62,6 +62,7 @@ class RequestResponseLog(models.Model):
     method = models.CharField(max_length=10, default="GET")
     status_code = models.IntegerField(default=200)
     created = models.DateTimeField(default=timezone.now, blank=True)
+    demo = models.CharField(max_length=1)
 
     # Changed from Integer to Float because middleware time is usually < 0
     time = models.DecimalField(decimal_places=3, max_digits=6)
