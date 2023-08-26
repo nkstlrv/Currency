@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework import generics
 from currency.models import Rate, ContactUs, Source, RequestResponseLog
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -60,3 +61,8 @@ class LoggingViewSet(viewsets.ModelViewSet):
     )
     filterset_class = LoggingFilter
     ordering_fields = ('method', 'path', "time", "created")
+
+
+class RateDetailDestroyApiView(generics.RetrieveDestroyAPIView):
+    serializer_class = RateSerializer
+    queryset = Rate.objects.all()

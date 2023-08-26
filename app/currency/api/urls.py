@@ -11,4 +11,8 @@ router.register('contact-us/', views.ContactUsViewSet, basename='contact-us')
 router.register('logging/', views.LoggingViewSet, basename='logging')
 
 
-urlpatterns = [] + router.urls
+urlpatterns = [
+    path("rate/detail-delete/<int:pk>/", views.RateDetailDestroyApiView.as_view(), name='rate-detail-delete'),
+]
+
+urlpatterns += router.urls
