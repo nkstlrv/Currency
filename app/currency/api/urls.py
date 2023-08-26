@@ -8,4 +8,7 @@ urlpatterns = [
     path("demo/", views.demo_view, name="api-demo"),
     path("rate/list/", views.RateListAPIView.as_view(), name="api-rate-list"),
     path("rate/<int:pk>/", views.RateDetailAPIView.as_view(), name="api-rate-detail"),
+    path("rate/create/", views.RateCreateAPIView.as_view(), name="api-rate-create"),
+
+    path("source/create/", views.SourceCreateAPIView.as_view(), name="api-source-create")
 ]
