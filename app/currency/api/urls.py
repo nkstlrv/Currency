@@ -1,14 +1,11 @@
 from currency.api import views
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 app_name = "currency_api"
 
+router = DefaultRouter(trailing_slash=False)
+router.register('rate/', views.RateViewSet, basename='rate')
 
-urlpatterns = [
-    path("demo/", views.demo_view, name="api-demo"),
-    path("rate/list/", views.RateListAPIView.as_view(), name="api-rate-list"),
-    path("rate/<int:pk>/", views.RateDetailAPIView.as_view(), name="api-rate-detail"),
-    path("rate/create/", views.RateCreateAPIView.as_view(), name="api-rate-create"),
 
-    path("source/create/", views.SourceCreateAPIView.as_view(), name="api-source-create")
-]
+urlpatterns = [] + router.urls
