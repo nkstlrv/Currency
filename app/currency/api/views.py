@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView,  RetrieveUpdateAPIView
 from currency.models import Rate, ContactUs, Source, RequestResponseLog
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -15,6 +15,6 @@ class RateListAPIView(ListAPIView):
     serializer_class = RateSerializer
 
 
-class RateDetailAPIView(RetrieveUpdateDestroyAPIView):
+class RateDetailAPIView(RetrieveUpdateAPIView):
     queryset = Rate.objects.all().order_by('-created')
     serializer_class = RateSerializer
