@@ -2,7 +2,7 @@ from rest_framework.generics import ListAPIView
 from currency.models import Rate, ContactUs, Source, RequestResponseLog
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import RateSerializer
+from .serializers import RateSerializer, SourceSerializer, ContactUsSerializer, LoggingSerializer
 
 
 @api_view(['GET'])
