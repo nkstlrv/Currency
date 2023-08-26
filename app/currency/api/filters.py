@@ -5,7 +5,12 @@ from currency.models import Rate, Source, ContactUs, RequestResponseLog
 class RateFilter(FilterSet):
     class Meta:
         model = Rate
-        fields = ("source", "currency")
+        fields = {
+            "buy": ('gt', 'gte', 'lt', 'lte', 'exact'),
+            "sell": ('gt', 'gte', 'lt', 'lte', 'exact'),
+            "currency": ('exact',),
+            "source": ('exact',),
+        }
 
 
 class SourceFilter(FilterSet):
