@@ -16,16 +16,26 @@ class RateFilter(FilterSet):
 class SourceFilter(FilterSet):
     class Meta:
         model = Source
-        fields = ("url", "name")
+        fields = {
+            "url": ('exact',),
+            "name": ('exact',),
+        }
 
 
 class ContactUsFilter(FilterSet):
     class Meta:
         model = ContactUs
-        fields = ("email_from", "subject")
+        fields = {
+            "email_from": ('exact',),
+            "subject": ('exact',),
+        }
 
 
 class LoggingFilter(FilterSet):
     class Meta:
         model = RequestResponseLog
-        fields = ("method", "status_code", "time")
+        fields = {
+            "method": ('exact',),
+            "status_code": ('exact',),
+            "time": ('exact',),
+        }
