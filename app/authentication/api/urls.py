@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import (
 )
 from django.urls import path
 
+app_name = "account_api"
+
 urlpatterns = [
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
