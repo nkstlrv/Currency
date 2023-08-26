@@ -49,6 +49,7 @@ EXTERNAL_APPS = [
     "crispy_bootstrap5",
     "django_filters",
     "rest_framework",
+    'rest_framework_simplejwt',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
