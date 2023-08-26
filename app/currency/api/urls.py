@@ -7,6 +7,7 @@ app_name = "currency_api"
 router = DefaultRouter(trailing_slash=False)
 router.register('rate/', views.RateViewSet, basename='rate')
 router.register('source/', views.SourceViewSet, basename='source')
+router.register('contact-us/', views.ContactUsViewSet, basename='contact-us')
 
 
 urlpatterns = [] + router.urls

@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import RateSerializer, SourceSerializer, ContactUsSerializer, LoggingSerializer
 from .paginators import MainPagination
-from .filters import RateFilter, SourceFilter, ContactUs
+from .filters import RateFilter, SourceFilter, ContactUsFilter
 from rest_framework import filters as rest_framework_filters
 from django_filters import rest_framework as filters
 
@@ -36,3 +36,15 @@ class SourceViewSet(viewsets.ModelViewSet):
     )
     filterset_class = SourceFilter
     ordering_fields = ('name', 'url')
+
+
+class ContactUsViewSet(viewsets.ModelViewSet):
+    queryset = ContactUs.objects.all().order_by('-id')
+    serializer_class = ContactUsSerializer
+    pagination_class = MainPagination
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        rest_framework_filters.OrderingFilter,
+    )
+    filterset_class = ContactUsFilter
+    ordering_fields = ('subject', 'email_from')
