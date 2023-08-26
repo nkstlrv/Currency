@@ -5,6 +5,7 @@ from currency.tasks import send_signup_verify_email
 from django.conf import settings
 from django.urls import reverse
 
+
 # from crispy_forms.helper import FormHelper
 # from crispy_forms.layout import Submit
 # from django.urls import reverse_lazy
@@ -71,7 +72,7 @@ class SignUpForm(forms.ModelForm):
         instance = super().save(commit=False)
 
         instance.set_password(self.cleaned_data["password1"])
-        instance.is_active = False
+        instance.is_active = True  # temporary changed
 
         instance.save()
         self._send_mail()
@@ -84,6 +85,8 @@ class SignUpForm(forms.ModelForm):
             {settings.HTTP_PROTOCOL}://{settings.DOMAIN}{activate_path}
         """
 
-        send_signup_verify_email.delay(
-            subject, body, settings.DEFAULT_FROM_EMAIL, self.instance.email
-        )
+        # temporary changed
+
+        # send_signup_verify_email.delay(
+        #     subject, body, settings.DEFAULT_FROM_EMAIL, self.instance.email
+        # )
