@@ -50,6 +50,8 @@ EXTERNAL_APPS = [
     "django_filters",
     "rest_framework",
     'rest_framework_simplejwt',
+    # 'django.contrib.staticfiles',
+    'drf_yasg',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -206,7 +208,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
-
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=14),

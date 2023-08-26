@@ -12,3 +12,4 @@ django-filter
 ipython
 djangorestframework
 djangorestframework-simplejwt
+drf-yasg
