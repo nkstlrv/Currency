@@ -5,5 +5,6 @@ app_name = "currency_api"
 
 
 urlpatterns = [
-    path("rate/list/", views.RatesListAPIView.as_view(), name="api-rate-list")
+    path("demo/", views.demo_view, name="api-demo"),
+    path("rate/list/", views.RatesListAPIView.as_view(), name="api-rate-list"),
 ]
