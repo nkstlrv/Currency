@@ -66,3 +66,18 @@ class LoggingViewSet(viewsets.ModelViewSet):
 class RateDetailDestroyApiView(generics.RetrieveDestroyAPIView):
     serializer_class = RateSerializer
     queryset = Rate.objects.all()
+
+
+class SourceDetailDestroyApiView(generics.RetrieveDestroyAPIView):
+    serializer_class = SourceSerializer
+    queryset = Source.objects.all()
+
+
+class ContactUsDetailDestroyApiView(generics.RetrieveDestroyAPIView):
+    serializer_class = ContactUsSerializer
+    queryset = ContactUs.objects.all()
+
+
+class LoggsUsDetailDestroyApiView(generics.RetrieveDestroyAPIView):
+    serializer_class = LoggingSerializer
+    queryset = RequestResponseLog.objects.all()
