@@ -1,8 +1,8 @@
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import ModelSerializer
 from currency.models import Rate, Source, ContactUs, RequestResponseLog
 
 
-class RateSerializer(Serializer):
+class RateSerializer(ModelSerializer):
     class Meta:
         model = Rate
         fields = (
@@ -13,7 +13,7 @@ class RateSerializer(Serializer):
         )
 
 
-class SourceSerializer(Serializer):
+class SourceSerializer(ModelSerializer):
     class Meta:
         model = Source
         fields = (
@@ -23,7 +23,7 @@ class SourceSerializer(Serializer):
         )
 
 
-class ContactUsSerializer(Serializer):
+class ContactUsSerializer(ModelSerializer):
     class Meta:
         model = ContactUs
         fields = (
@@ -34,7 +34,7 @@ class ContactUsSerializer(Serializer):
         )
 
 
-class LoggingSerializer(Serializer):
+class LoggingSerializer(ModelSerializer):
     class Meta:
         model = RequestResponseLog
         fields = (
