@@ -167,7 +167,6 @@ LOGIN_URL = reverse_lazy("login")
 LOGOUT_REDIRECT_URL = reverse_lazy("home")
 AUTH_USER_MODEL = "authentication.User"
 
-
 # Celery configurations:
 CELERY_BROKER_URL = "amqp://localhost"  # default port -> 15672; password -> guest
 
@@ -186,7 +185,6 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-
 # REST_FRAMEWORK = {
 #     # Use Django's standard `django.contrib.auth` permissions,
 #     # or allow read-only access for unauthenticated users.
@@ -198,6 +196,7 @@ CELERY_BEAT_SCHEDULE = {
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
