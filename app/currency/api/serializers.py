@@ -20,6 +20,7 @@ class SourceSerializer(ModelSerializer):
             'id',
             'url',
             'dev_name',
+            'name',
         )
 
 

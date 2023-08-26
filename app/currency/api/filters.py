@@ -10,6 +10,7 @@ class RateFilter(FilterSet):
             "sell": ('gt', 'gte', 'lt', 'lte', 'exact'),
             "currency": ('exact',),
             "source": ('exact',),
+            "id": ('exact',),
         }
 
 
@@ -19,6 +20,7 @@ class SourceFilter(FilterSet):
         fields = {
             "url": ('exact',),
             "name": ('exact',),
+            "id": ('exact',),
         }
 
 
@@ -28,6 +30,7 @@ class ContactUsFilter(FilterSet):
         fields = {
             "email_from": ('exact',),
             "subject": ('exact',),
+            "id": ('exact',),
         }
 
 
@@ -38,4 +41,5 @@ class LoggingFilter(FilterSet):
             "method": ('exact',),
             "status_code": ('exact',),
             "time": ('exact',),
+            "id": ('exact',),
         }
