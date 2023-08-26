@@ -6,11 +6,11 @@ class RateFilter(FilterSet):
     class Meta:
         model = Rate
         fields = {
-            "buy": ('gt', 'gte', 'lt', 'lte', 'exact'),
-            "sell": ('gt', 'gte', 'lt', 'lte', 'exact'),
-            "currency": ('exact',),
-            "source": ('exact',),
-            "id": ('exact',),
+            "buy": ("gt", "gte", "lt", "lte", "exact"),
+            "sell": ("gt", "gte", "lt", "lte", "exact"),
+            "currency": ("exact",),
+            "source": ("exact",),
+            "id": ("exact",),
         }
 
 
@@ -18,9 +18,9 @@ class SourceFilter(FilterSet):
     class Meta:
         model = Source
         fields = {
-            "url": ('exact',),
-            "name": ('exact',),
-            "id": ('exact',),
+            "url": ("exact",),
+            "name": ("exact",),
+            "id": ("exact",),
         }
 
 
@@ -28,9 +28,9 @@ class ContactUsFilter(FilterSet):
     class Meta:
         model = ContactUs
         fields = {
-            "email_from": ('exact',),
-            "subject": ('exact',),
-            "id": ('exact',),
+            "email_from": ("exact",),
+            "subject": ("exact",),
+            "id": ("exact",),
         }
 
 
@@ -38,8 +38,8 @@ class LoggingFilter(FilterSet):
     class Meta:
         model = RequestResponseLog
         fields = {
-            "method": ('exact',),
-            "status_code": ('exact',),
-            "time": ('exact',),
-            "id": ('exact',),
+            "method": ("exact",),
+            "status_code": ("exact",),
+            "time": ("exact",),
+            "id": ("exact",),
         }

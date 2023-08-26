@@ -85,8 +85,6 @@ class SignUpForm(forms.ModelForm):
             {settings.HTTP_PROTOCOL}://{settings.DOMAIN}{activate_path}
         """
 
-        # temporary changed
-
-        # send_signup_verify_email.delay(
-        #     subject, body, settings.DEFAULT_FROM_EMAIL, self.instance.email
-        # )
+        send_signup_verify_email.delay(
+            subject, body, settings.DEFAULT_FROM_EMAIL, self.instance.email
+        )

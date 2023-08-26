@@ -7,10 +7,10 @@ class RateSerializer(ModelSerializer):
     class Meta:
         model = Rate
         fields = (
-            'id',
-            'buy',
-            'sell',
-            'source',
+            "id",
+            "buy",
+            "sell",
+            "source",
         )
 
 
@@ -18,10 +18,10 @@ class SourceSerializer(ModelSerializer):
     class Meta:
         model = Source
         fields = (
-            'id',
-            'url',
-            'dev_name',
-            'name',
+            "id",
+            "url",
+            "dev_name",
+            "name",
         )
 
 
@@ -29,10 +29,10 @@ class ContactUsSerializer(ModelSerializer):
     class Meta:
         model = ContactUs
         fields = (
-            'id',
-            'email_from',
-            'subject',
-            'message',
+            "id",
+            "email_from",
+            "subject",
+            "message",
         )
 
     def create(self, validated_data):
@@ -48,10 +48,10 @@ class LoggingSerializer(ModelSerializer):
     class Meta:
         model = RequestResponseLog
         fields = (
-            'id',
-            'path',
-            'method',
-            'status_code',
-            'created',
-            'time',
+            "id",
+            "path",
+            "method",
+            "status_code",
+            "created",
+            "time",
         )
