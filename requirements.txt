@@ -9,5 +9,7 @@ django-crispy-forms
 Celery
 requests
 django-filter
-
 ipython
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
