@@ -26,10 +26,11 @@ def api_client_auth(django_user_model):
     try:
         user = django_user_model.objects.get(email="test@mail.com")
     except django_user_model.DoesNotExist:
-        user = django_user_model(
+        user = django_user_model.objects.create(
             email="test@mail.com",
         )
         user.set_password(password)
+        user.is_active = True
         user.save()
 
     token_response = client.post(
