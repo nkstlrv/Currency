@@ -206,7 +206,8 @@ REST_FRAMEWORK = {
     ),
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',  # temp removed for debugging
-    # ]
+    # ],
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
 SIMPLE_JWT = {
