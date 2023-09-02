@@ -1,7 +1,6 @@
 # from django.core.management import call_command
 import pytest
-import os
-from dotenv import load_dotenv
+from rest_framework.test import APIClient
 
 
 @pytest.fixture(autouse=True, scope="function")
@@ -19,14 +18,29 @@ def api_client():
     yield client
 
 
-@pytest.fixture()
-def api_client_auth():
-    from rest_framework.test import APIClient
-
-    load_dotenv()
-
+@pytest.fixture(scope="function")
+def api_client_auth(django_user_model):
     client = APIClient()
-    client.login(
-        username=os.getenv("TEST_USERNAME"), password=os.getenv("TEST_PASSWORD")
+    password = "test"
+
+    try:
+        user = django_user_model.objects.get(email="test@mail.com")
+    except django_user_model.DoesNotExist:
+        user = django_user_model(
+            email="test@mail.com",
+        )
+        user.set_password(password)
+        user.save()
+
+    token_response = client.post(
+        "/api/auth/token/",
+        data={"email": user.email, "password": password},
     )
+
+    assert token_response.status_code == 200
+    access = token_response.json().get("access")
+    client.credentials(HTTP_AUTHORIZATION=f"JWT {access}")
+
     yield client
+
+    user.delete()
