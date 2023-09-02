@@ -151,4 +151,5 @@ def mono_api():
 
 if __name__ == "__main__":
     # print(mono_api()[0:2])
+    # get_currency_privatbank().delay()
     ...
