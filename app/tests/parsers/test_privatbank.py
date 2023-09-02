@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from currency import consts
 from currency.choices import RateCurrencyChoices
 from currency.models import Rate, Source
-from currency.tasks import get_currency_privatbank, get_currency_monobank
+from currency.tasks import get_currency_privatbank
 
 privatbank_test_data = [
     {"ccy": "EUR", "base_ccy": "UAH", "buy": "39.43920", "sale": "42.01681"},
@@ -46,3 +46,4 @@ def test_privatbank_parser_prevent_duplicates(mocker):
     get_currency_privatbank()
 
     assert Rate.objects.count() == db_objects_count_before_test
+    assert request_get_mock.call_count == 1
