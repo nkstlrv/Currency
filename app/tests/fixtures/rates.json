@@ -1,67 +1,45 @@
 [
   {
     "model": "currency.rate",
-    "pk": 1,
+    "pk": 16,
     "fields": {
-      "buy": "1.00",
-      "sell": "1.00",
-      "currency": 1,
-      "created": "2023-09-02T15:30:57.891Z",
-      "source": 3
-    }
-  },
-  {
-    "model": "currency.rate",
-    "pk": 2,
-    "fields": {
-      "buy": "2.00",
-      "sell": "2.00",
-      "currency": 1,
-      "created": "2023-09-02T15:31:08.168Z",
-      "source": 4
-    }
-  },
-  {
-    "model": "currency.rate",
-    "pk": 3,
-    "fields": {
-      "buy": "3.00",
-      "sell": "3.00",
+      "buy": "39.62",
+      "sell": "41.49",
       "currency": 2,
-      "created": "2023-09-02T15:31:17.592Z",
-      "source": 3
+      "created": "2023-09-02T20:15:00.372Z",
+      "source": 8
     }
   },
   {
     "model": "currency.rate",
-    "pk": 4,
+    "pk": 17,
     "fields": {
-      "buy": "4.00",
-      "sell": "4.00",
-      "currency": 2,
-      "created": "2023-09-02T15:31:24.228Z",
-      "source": 4
+      "buy": "36.56",
+      "sell": "37.45",
+      "currency": 1,
+      "created": "2023-09-02T20:15:00.377Z",
+      "source": 8
     }
   },
   {
     "model": "currency.rate",
-    "pk": 6,
+    "pk": 18,
     "fields": {
       "buy": "36.64",
       "sell": "37.44",
       "currency": 1,
-      "created": "2023-09-02T18:12:03.336Z",
+      "created": "2023-09-02T20:18:00.556Z",
       "source": 7
     }
   },
   {
     "model": "currency.rate",
-    "pk": 7,
+    "pk": 19,
     "fields": {
       "buy": "39.63",
       "sell": "41.00",
       "currency": 2,
-      "created": "2023-09-02T18:12:03.340Z",
+      "created": "2023-09-02T20:18:00.571Z",
       "source": 7
     }
   }

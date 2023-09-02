@@ -8,7 +8,7 @@ def test_get_api_rates(api_client_auth):
 
 
 def test_get_api_rate_valid_id(api_client_auth):
-    response = api_client_auth.get("/api/currency/rate/?id=1")
+    response = api_client_auth.get("/api/currency/rate/?id=16")
     assert response.status_code == 200
     assert len(response.json()["results"]) == 1
 
@@ -20,7 +20,7 @@ def test_get_api_rate_invalid_id(api_client_auth):
 
 
 def test_get_api_rate_invalid_param_format(api_client_auth):
-    response = api_client_auth.get("/api/currency/rate/1")
+    response = api_client_auth.get("/api/currency/rate/16")
     assert response.status_code == 404
 
 
@@ -57,7 +57,7 @@ def test_post_valid_api_rates_no_currency(api_client_auth):
 
 def test_rate_destroy_success(api_client_auth):
     rate_count = Rate.objects.count()
-    response = api_client_auth.delete("/api/currency/rate/detail-delete/1/")
+    response = api_client_auth.delete("/api/currency/rate/detail-delete/16/")
     assert response.status_code == 204
     assert Rate.objects.count() == rate_count - 1
 
@@ -75,7 +75,7 @@ def test_get_source(api_client_auth):
 
 
 def test_get_source_valid_id(api_client_auth):
-    response = api_client_auth.get("/api/currency/source/?id=4")
+    response = api_client_auth.get("/api/currency/source/?id=7")
     assert response.status_code == 200
     assert len(response.json()["results"]) == 1
 
@@ -134,7 +134,7 @@ def test_post_source_invalid_max_length(api_client_auth):
 
 def test_source_destroy_success(api_client_auth):
     source_count = Source.objects.count()
-    response = api_client_auth.delete("/api/currency/source/detail-delete/4/")
+    response = api_client_auth.delete("/api/currency/source/detail-delete/7/")
     assert response.status_code == 204
     assert Source.objects.count() == source_count - 1
 

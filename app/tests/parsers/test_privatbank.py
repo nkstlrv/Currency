@@ -6,9 +6,9 @@ from currency.models import Rate, Source
 from currency.tasks import get_currency_privatbank
 
 privatbank_test_data = [
-    {"ccy": "EUR", "base_ccy": "UAH", "buy": "39.43920", "sale": "42.01681"},
-    {"ccy": "USD", "base_ccy": "UAH", "buy": "36.56860", "sale": "37.45318"},
-    {"ccy": "PLN", "base_ccy": "UAH", "buy": "36.56860", "sale": "37.45318"},
+    {"ccy": "EUR", "base_ccy": "UAH", "buy": "1", "sale": "2"},
+    {"ccy": "USD", "base_ccy": "UAH", "buy": "3", "sale": "4"},
+    {"ccy": "PLN", "base_ccy": "UAH", "buy": "5", "sale": "6"},
 ]
 
 
@@ -17,11 +17,12 @@ def test_privatbank_parser(mocker):
         "requests.get", return_value=MagicMock(json=lambda: privatbank_test_data)
     )
 
-    db_objects_count_before_test = Rate.objects.count()
+    rate_count = Rate.objects.count()
 
     get_currency_privatbank()
 
-    assert Rate.objects.count() == db_objects_count_before_test + 2
+    new_rate_count = rate_count + 2
+    assert Rate.objects.count() == new_rate_count
     assert request_get_mock.call_count == 1
     assert (
         request_get_mock.call_args[0][0]
@@ -35,15 +36,15 @@ def test_privatbank_parser_prevent_duplicates(mocker):
     )
     source = Source.objects.get(dev_name=consts.PRIVATBANK_DEV_NAME)
     Rate.objects.create(
-        buy="39.43", sell="42.01", source=source, currency=RateCurrencyChoices.EUR
+        buy="39.62", sell="39.62", source=source, currency=RateCurrencyChoices.EUR
     )
     Rate.objects.create(
         buy="36.56", sell="37.45", source=source, currency=RateCurrencyChoices.USD
     )
 
-    db_objects_count_before_test = Rate.objects.count()
+    rate_count = Rate.objects.count()
 
     get_currency_privatbank()
 
-    assert Rate.objects.count() == db_objects_count_before_test
+    assert Rate.objects.count() == rate_count
     assert request_get_mock.call_count == 1
