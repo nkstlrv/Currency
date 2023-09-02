@@ -46,7 +46,6 @@ def test_post_invalid_email_contactus_errors(client):
 
 def test_post_valid_email_contactus(client, mailoutbox):
     db_objects_start = ContactUs.objects.count()
-    assert db_objects_start == 0
     payload = {
         "email_from": "VALID_EMAIL@MAIL.COM",
         "subject": "Test",
@@ -57,4 +56,4 @@ def test_post_valid_email_contactus(client, mailoutbox):
     assert response.status_code == 302
     assert response.headers["Location"] == "/"
     assert len(mailoutbox) == 1
-    assert db_objects_end == 1
+    assert db_objects_end == db_objects_start + 1

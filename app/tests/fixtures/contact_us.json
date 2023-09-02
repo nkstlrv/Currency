@@ -1,0 +1,1 @@
+[{"model": "currency.contactus", "pk": 1, "fields": {"email_from": "test1@mail.com", "subject": "Test1", "message": "Test1"}}, {"model": "currency.contactus", "pk": 2, "fields": {"email_from": "test2@mail.com", "subject": "Test 2", "message": "Test 2"}}, {"model": "currency.contactus", "pk": 3, "fields": {"email_from": "test3@mail.com", "subject": "Test 3", "message": "Test 3"}}]

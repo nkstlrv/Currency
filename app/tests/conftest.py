@@ -1,5 +1,6 @@
 # from django.core.management import call_command
 import pytest
+from django.core.management import call_command
 from rest_framework.test import APIClient
 
 
@@ -45,3 +46,11 @@ def api_client_auth(django_user_model):
     yield client
 
     user.delete()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def load_fixtures(django_db_setup, django_db_blocker):
+    with django_db_blocker.unblock():
+        fixtures = ("sources.json", "rates.json", "contact_us.json")
+        for fixture in fixtures:
+            call_command("loaddata", f"app/tests/fixtures/{fixture}")

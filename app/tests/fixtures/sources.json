@@ -1,0 +1,1 @@
+[{"model": "currency.source", "pk": 3, "fields": {"name": "s1", "dev_name": "", "url": "u1", "logo": ""}}, {"model": "currency.source", "pk": 4, "fields": {"name": "s2", "dev_name": "", "url": "u2", "logo": ""}}]
