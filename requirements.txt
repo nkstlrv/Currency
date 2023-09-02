@@ -15,3 +15,6 @@ djangorestframework-simplejwt
 drf-yasg
 pytest
 pytest-django
+model_bakery
+pytest-cov
+
