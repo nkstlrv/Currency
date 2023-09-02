@@ -1,3 +1,6 @@
+from currency.models import ContactUs
+
+
 def test_get_contactus_list(client):
     response = client.get("/contacts/list/")
     assert response.status_code == 200
@@ -41,11 +44,17 @@ def test_post_invalid_email_contactus_errors(client):
     }
 
 
-def test_post_valid_email_contactus(client):
+def test_post_valid_email_contactus(client, mailoutbox):
+    db_objects_start = ContactUs.objects.count()
+    assert db_objects_start == 0
     payload = {
         "email_from": "VALID_EMAIL@MAIL.COM",
         "subject": "Test",
         "message": "Test",
     }
     response = client.post("/contacts/create/", data=payload)
+    db_objects_end = ContactUs.objects.count()
     assert response.status_code == 302
+    assert response.headers["Location"] == "/"
+    assert len(mailoutbox) == 1
+    assert db_objects_end == 1

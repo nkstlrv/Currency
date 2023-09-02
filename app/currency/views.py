@@ -89,7 +89,7 @@ class ContactCreateView(CreateView, LoginRequiredMixin):
     model = models.ContactUs
     form_class = ContactsForm
     template_name = "currency/contact_create.html"
-    success_url = reverse_lazy("contacts_table")
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         cleaned_data = form.cleaned_data
