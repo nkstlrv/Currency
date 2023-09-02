@@ -13,3 +13,4 @@ ipython
 djangorestframework
 djangorestframework-simplejwt
 drf-yasg
+pytest
