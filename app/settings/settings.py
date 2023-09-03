@@ -180,11 +180,11 @@ CELERY_BEAT_SCHEDULE = {
     # },
     "privat_parse": {
         "task": "currency.tasks.get_currency_privatbank",
-        "schedule": crontab(minute="*/5"),
+        "schedule": crontab(minute="*/1"),
     },
     "monobank_parse": {
         "task": "currency.tasks.get_currency_monobank",
-        "schedule": crontab(minute="*/6"),
+        "schedule": crontab(minute="*/1"),
     },
 }
 
