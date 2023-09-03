@@ -6,9 +6,9 @@ from currency.models import Rate, Source
 from currency.tasks import get_currency_privatbank
 
 privatbank_test_data = [
-    {"ccy": "EUR", "base_ccy": "UAH", "buy": "1", "sale": "2"},
-    {"ccy": "USD", "base_ccy": "UAH", "buy": "3", "sale": "4"},
-    {"ccy": "PLN", "base_ccy": "UAH", "buy": "5", "sale": "6"},
+    {"ccy": "EUR", "base_ccy": "UAH", "buy": "39.62", "sale": "39.62"},
+    {"ccy": "USD", "base_ccy": "UAH", "buy": "37.45", "sale": "37.45"},
+    {"ccy": "PLN", "base_ccy": "UAH", "buy": "37.45", "sale": "37.45"},
 ]
 
 
@@ -39,7 +39,7 @@ def test_privatbank_parser_prevent_duplicates(mocker):
         buy="39.62", sell="39.62", source=source, currency=RateCurrencyChoices.EUR
     )
     Rate.objects.create(
-        buy="36.56", sell="37.45", source=source, currency=RateCurrencyChoices.USD
+        buy="37.45", sell="37.45", source=source, currency=RateCurrencyChoices.USD
     )
 
     rate_count = Rate.objects.count()
