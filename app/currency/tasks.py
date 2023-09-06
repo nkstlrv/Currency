@@ -58,7 +58,7 @@ def get_currency_privatbank():
 
     source = Source.objects.filter(dev_name=PRIVATBANK_DEV_NAME).first()
     if source is None:
-        Source.objects.create(
+        source = Source.objects.create(
             dev_name=PRIVATBANK_DEV_NAME, name="PrivatBank", url=privatbank_api_url
         )
         logging.info("NEW PRIVATBANK SOURCE")
@@ -106,7 +106,7 @@ def get_currency_monobank():
 
     source = Source.objects.filter(dev_name=MONOBANK_DEV_NAME).first()
     if source is None:
-        Source.objects.create(
+        source = Source.objects.create(
             dev_name=MONOBANK_DEV_NAME, name="MonoBank", url=monobank_api_url
         )
         logging.info("NEW MONOBANK SOURCE")
@@ -114,7 +114,7 @@ def get_currency_monobank():
     response = requests.get(monobank_api_url)
     response.raise_for_status()
 
-    rates = response.json()
+    rates = response.json()[0:2]
 
     available_currencies = {
         840: RateCurrencyChoices.USD,
@@ -151,4 +151,5 @@ def mono_api():
 
 if __name__ == "__main__":
     # print(mono_api()[0:2])
+    # get_currency_privatbank().delay()
     ...

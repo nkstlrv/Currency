@@ -4,7 +4,6 @@ run:
 migrate:
 	python app/manage.py migrate
 
-
 makemigrations:
 	python app/manage.py makemigrations
 
@@ -16,3 +15,6 @@ celery:
 
 beat:
 	cd app && celery -A settings beat -l INFO
+
+pytest:
+	pytest ./app/tests --cov=app --cov-report html && coverage report --fail-under=75

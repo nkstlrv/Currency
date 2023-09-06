@@ -13,3 +13,9 @@ ipython
 djangorestframework
 djangorestframework-simplejwt
 drf-yasg
+pytest
+pytest-django
+model_bakery
+pytest-cov
+pytest-mock
+pretty-errors

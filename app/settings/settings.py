@@ -180,11 +180,11 @@ CELERY_BEAT_SCHEDULE = {
     # },
     "privat_parse": {
         "task": "currency.tasks.get_currency_privatbank",
-        "schedule": crontab(minute="*/5"),
+        "schedule": crontab(minute="*/1"),
     },
     "monobank_parse": {
         "task": "currency.tasks.get_currency_monobank",
-        "schedule": crontab(minute="*/6"),
+        "schedule": crontab(minute="*/1"),
     },
 }
 
@@ -197,16 +197,15 @@ CELERY_BEAT_SCHEDULE = {
 # }
 
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": [
+    "DEFAULT_RENDERER_CLASSES": (
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
-    ],
+    ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',  # temp removed for debugging
-    # ]
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
 SIMPLE_JWT = {
@@ -223,7 +222,10 @@ SIMPLE_JWT = {
     "JSON_ENCODER": None,
     "JWK_URL": None,
     "LEEWAY": 0,
-    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_TYPES": (
+        "Bearer",
+        "JWT",
+    ),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
