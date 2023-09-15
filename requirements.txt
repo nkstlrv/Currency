@@ -19,3 +19,4 @@ model_bakery
 pytest-cov
 pytest-mock
 pretty-errors
+gunicorn
