@@ -171,7 +171,7 @@ MEDIA_ROOT = BASE_DIR.parent / "var" / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DOMAIN = "127.0.0.1:8000"
+DOMAIN = "127.0.0.1:8080"
 HTTP_PROTOCOL = "http"
 
 # Email engine configurations:
