@@ -20,3 +20,8 @@ beat:
 
 pytest:
 	pytest ./app/tests --cov=app --cov-report html && coverage report --fail-under=75
+
+collectstatic:
+	$(manage_py) collectstatic --no-input && \
+	docker cp backend:/tmp/static /tmp/static && \
+	docker cp /tmp/static nginx:/etc/nginx/static
