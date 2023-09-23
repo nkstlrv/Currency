@@ -4,12 +4,16 @@ services:
   memcached:
     image: memcached:1.6.21-alpine
     container_name: memcached
+    env_file:
+      - .env
     ports:
       - "11211:11211"
 
   rabbitmq:
     image: rabbitmq:3.12.4-management
     container_name: rabbitmq
+    env_file:
+      - .env
     ports:
       - "5673:5672"
       - "15672:15672"
