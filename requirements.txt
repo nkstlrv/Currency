@@ -20,3 +20,4 @@ pytest-cov
 pytest-mock
 pretty-errors
 gunicorn
+psycopg2-binary==2.9.7
