@@ -1,14 +1,14 @@
 run:
-	python app/manage.py runserver
+	python3 app/manage.py runserver
 
 migrate:
-	python app/manage.py migrate
+	python3 app/manage.py migrate
 
 makemigrations:
-	python app/manage.py makemigrations
+	python3 app/manage.py makemigrations
 
 shell:
-	python app/manage.py shell_plus --print-sql
+	python3 app/manage.py shell_plus --print-sql
 
 celery:
 	cd app && celery -A settings worker -l INFO --autoscale=0,10
