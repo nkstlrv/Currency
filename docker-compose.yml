@@ -4,14 +4,19 @@ services:
 
   backend:
     image: currency-backend
+    stdin_open: true
+    tty: true
     build: .
     container_name: backend
     env_file:
       - .env
     ports:
       - "5000:5000"
-    stdin_open: true
-    tty: true
+    depends_on:
+      - postgres
+      - rabbitmq
+      - memcached
+
 
   memcached:
     image: memcached:1.6.21-alpine
@@ -42,5 +47,5 @@ services:
 
 
 volumes:
-  db_data: {}
+  db_data: { }
 
