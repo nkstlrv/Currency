@@ -18,7 +18,7 @@ services:
       - memcached
 
   celery:
-    command: bash -c "cd app && celery -A settings worker -l INFO --autoscale=0,10 && celery -A settings beat -l INFO"
+    command: bash -c "cd app && celery -A settings worker -l INFO --autoscale=0,10"
 #    - bash -c "cd app && celery -A settings beat -l INFO"
     image: currency-backend
     stdin_open: true
@@ -31,6 +31,21 @@ services:
       - postgres
       - rabbitmq
       - backend
+
+  celery-beat:
+    command: bash -c "cd app && celery -A settings beat -l INFO"
+    image: currency-backend
+    stdin_open: true
+    tty: true
+    build: .
+    container_name: celery-beat
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - rabbitmq
+      - backend
+      - celery
 
 
   memcached:

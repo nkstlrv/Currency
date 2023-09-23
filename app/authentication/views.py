@@ -16,7 +16,7 @@ class ProfileView(UpdateView, LoginRequiredMixin):
         "first_name",
         "last_name",
         "email",
-        "phone_number",
+        # "phone_number",
         # This is temporary field; will be removed when registration will be available
         "is_superuser",
     )
