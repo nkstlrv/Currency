@@ -78,6 +78,15 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      -
 
 volumes:
   db_data: { }
