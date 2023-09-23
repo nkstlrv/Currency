@@ -1,14 +1,16 @@
+manage_py := docker compose exec -it backend python app/manage.py
+
 run:
-	python3 app/manage.py runserver
+	$(manage_py) runserver
 
 migrate:
-	python3 app/manage.py migrate
+	$(manage_py) migrate
 
 makemigrations:
-	python3 app/manage.py makemigrations
+	$(manage_py) makemigrations
 
 shell:
-	python3 app/manage.py shell_plus --print-sql
+	$(manage_py) shell_plus --print-sql
 
 celery:
 	cd app && celery -A settings worker -l INFO --autoscale=0,10
