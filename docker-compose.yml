@@ -17,6 +17,8 @@ services:
       - postgres
       - rabbitmq
       - memcached
+    volumes:
+      - "./:/project/code"
 
   celery:
     command: bash -c "celery -A settings worker -l INFO --autoscale=0,10"
