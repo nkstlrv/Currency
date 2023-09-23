@@ -17,3 +17,9 @@ services:
     ports:
       - "5673:5672"
       - "15672:15672"
+
+  postgres:
+    image: postgres:15.4-alpine
+    ports:
+      - "5432:5432"
+
