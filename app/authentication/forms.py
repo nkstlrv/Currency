@@ -54,7 +54,7 @@ class SignUpForm(forms.ModelForm):
         model = get_user_model()
         fields = (
             "email",
-            "phone_number",
+            # "phone_number",
             "password1",
             "password2",
         )
