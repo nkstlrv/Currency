@@ -183,7 +183,11 @@ LOGOUT_REDIRECT_URL = reverse_lazy("home")
 AUTH_USER_MODEL = "authentication.User"
 
 # Celery configurations:
-CELERY_BROKER_URL = f"amqp://{os.getenv('RABBITMQ_USER')}:{os.getenv('RABBITMQ_PASSWORD')}@localhost:5672"
+CELERY_BROKER_URL = (f"amqp://"
+                     f"{os.getenv('RABBITMQ_USER')}:"
+                     f"{os.getenv('RABBITMQ_PASSWORD')}@"
+                     f"{os.getenv('RABBITMQ_HOST')}:"
+                     f"{os.getenv('RABBITMQ_PORT')}")
 
 CELERY_BEAT_SCHEDULE = {
     # "debug": {
