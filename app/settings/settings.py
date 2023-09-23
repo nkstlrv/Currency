@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -183,7 +183,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy("home")
 AUTH_USER_MODEL = "authentication.User"
 
 # Celery configurations:
-CELERY_BROKER_URL = "amqp://localhost"  # default port -> 15672; password -> guest
+CELERY_BROKER_URL = f"amqp://{os.getenv('RABBITMQ_USER')}:{os.getenv('RABBITMQ_PASSWORD')}@localhost:5672"
 
 CELERY_BEAT_SCHEDULE = {
     # "debug": {
