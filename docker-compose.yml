@@ -3,6 +3,7 @@ version: "3.9"
 services:
 
   backend:
+#    command: python3 .app/manage.py runserver 0.0.0.0:5000
     image: currency-backend
     stdin_open: true
     tty: true
@@ -18,7 +19,7 @@ services:
       - memcached
 
   celery:
-    command: bash -c "cd app && celery -A settings worker -l INFO --autoscale=0,10"
+    command: bash -c "celery -A settings worker -l INFO --autoscale=0,10"
 #    - bash -c "cd app && celery -A settings beat -l INFO"
     image: currency-backend
     stdin_open: true
@@ -33,7 +34,7 @@ services:
       - backend
 
   celery-beat:
-    command: bash -c "cd app && celery -A settings beat -l INFO"
+    command: bash -c "celery -A settings beat -l INFO"
     image: currency-backend
     stdin_open: true
     tty: true
