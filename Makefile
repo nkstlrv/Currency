@@ -1,14 +1,16 @@
+manage_py := docker compose exec -it backend python app/manage.py
+
 run:
-	python app/manage.py runserver
+	$(manage_py) runserver
 
 migrate:
-	python app/manage.py migrate
+	$(manage_py) migrate
 
 makemigrations:
-	python app/manage.py makemigrations
+	$(manage_py) makemigrations
 
 shell:
-	python app/manage.py shell_plus --print-sql
+	$(manage_py) shell_plus --print-sql
 
 celery:
 	cd app && celery -A settings worker -l INFO --autoscale=0,10
@@ -18,3 +20,8 @@ beat:
 
 pytest:
 	pytest ./app/tests --cov=app --cov-report html && coverage report --fail-under=75
+
+collectstatic:
+	$(manage_py) collectstatic --no-input && \
+	docker cp backend:/tmp/static /tmp/static && \
+	docker cp /tmp/static nginx:/etc/nginx/static

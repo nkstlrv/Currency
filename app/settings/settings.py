@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -103,12 +103,32 @@ WSGI_APPLICATION = "settings.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# SQLite
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+# Postgres
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("POSTGRES_NAME"),
+        'USER': os.getenv("POSTGRES_USER"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'HOST': os.getenv("POSTGRES_HOST"),
+        'PORT': os.getenv("POSTGRES_PORT"),
     }
 }
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+#         "LOCATION": "memcached:11211",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -143,7 +163,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR.parent / "var" / "static"
+# STATIC_ROOT = BASE_DIR.parent / "var" / "static"
+STATIC_ROOT = "/tmp/static"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR.parent / "var" / "media"
@@ -151,7 +172,7 @@ MEDIA_ROOT = BASE_DIR.parent / "var" / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DOMAIN = "127.0.0.1:8000"
+DOMAIN = "127.0.0.1:5000"
 HTTP_PROTOCOL = "http"
 
 # Email engine configurations:
@@ -176,7 +197,11 @@ LOGOUT_REDIRECT_URL = reverse_lazy("home")
 AUTH_USER_MODEL = "authentication.User"
 
 # Celery configurations:
-CELERY_BROKER_URL = "amqp://localhost"  # default port -> 15672; password -> guest
+CELERY_BROKER_URL = (f"amqp://"
+                     f"{os.getenv('RABBITMQ_USER')}:"
+                     f"{os.getenv('RABBITMQ_PASSWORD')}@"
+                     f"{os.getenv('RABBITMQ_HOST')}:"
+                     f"{os.getenv('RABBITMQ_PORT')}")
 
 CELERY_BEAT_SCHEDULE = {
     # "debug": {
