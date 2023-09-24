@@ -1,4 +1,4 @@
-manage_py := docker compose exec -it backend python app/manage.py
+manage_py := sudo docker compose exec -it backend python app/manage.py
 
 run:
 	$(manage_py) runserver

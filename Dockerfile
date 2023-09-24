@@ -8,6 +8,8 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
+RUN python app/manage.py migrate
+
 ENV PYTHONPATH /project/code/app
 
 CMD gunicorn --workers 4 --threads 4 settings.wsgi --timeout 30 --max-requests 10000 --log-level info --bind 0.0.0.0:5000

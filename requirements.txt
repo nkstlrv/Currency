@@ -21,3 +21,4 @@ pytest-mock
 pretty-errors
 gunicorn
 psycopg2-binary
+flower
