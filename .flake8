@@ -1,4 +1,4 @@
 [flake8]
 max-line-length = 120
-exclude = migrations, urls.py, settings_test.py
+exclude = migrations, urls.py, settings_test.py, .parser_venv
 

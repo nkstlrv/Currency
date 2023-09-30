@@ -1,4 +1,6 @@
 import csv
+import logging
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -76,4 +78,4 @@ class CSVWriter:
 class StdOutWriter:
     @staticmethod
     def write(data):
-        print(data)
+        logging.info(data)
