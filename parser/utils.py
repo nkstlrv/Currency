@@ -2,6 +2,7 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
+
 def get_page(url: str, page: int, page_size: int = 100) -> str:
     query_parameters = {
         "indexName": "auto,order_auto,newauto_search",

@@ -9,7 +9,7 @@ class SQLiteWriter:
         create_table_query = """
         CREATE TABLE IF NOT EXISTS cars (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            car_id TEXT,
+            car_id TEXT UNIQUE,
             car_manufacturer TEXT,
             car_model TEXT,
             car_year TEXT,

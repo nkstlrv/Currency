@@ -40,10 +40,11 @@ def main() -> None:
     # creating db handler
     db = SQLiteWriter("cars.db")
     db.create_table()
+    logging.info("CONNECTING TO DB")
 
     while True:
         logging.info(f"PAGE: {current_page+1}")
-        time.sleep(random.randint(3, 5))
+        time.sleep(random.randint(1, 3))
 
         page_html = get_page(BASE_URL, page=current_page)
         soup = BeautifulSoup(page_html, "html.parser")
@@ -55,6 +56,7 @@ def main() -> None:
             break
 
         for item in content:
+            time.sleep(random.randint(1, 3))
             car_details = item.find("div", {"class": "hide"})
             car_id = car_details["data-id"]
             link_to_page = car_details["data-link-to-view"]
