@@ -33,6 +33,33 @@ def get_card_detailed_page(car_url: str) -> str:
     return response.text
 
 
+def get_car_detailed_data(page_html: str) -> dict:
+    result = dict()
+    soup = BeautifulSoup(page_html, "html.parser")
+
+    result["car_price"] = soup.find("div", {"class", "price_value"}).find("strong").text
+    result["car_description"] = soup.find("div", {"class", "full-description"}).text
+
+    additional_data = soup.find("div", {"class", "box-panel description-car"}).find_all("dd")
+    for item in additional_data:
+        if item.find("span") is not None:
+            if "Пробіг" in item.text:
+                result["car_run"] = item.find("span", {"class": "argument"}).text
+            elif "Двигун" in item.text:
+                result["car_engine"] = item.find("span", {"class": "argument"}).text
+            elif "Колір" in item.text:
+                result["car_color"] = item.find("span", {"class": "argument"}).text
+            elif "Привід" in item.text:
+                result["car_drive"] = item.find("span", {"class": "argument"}).text
+            elif "Коробка передач" in item.text:
+                result["car_gearbox"] = item.find("span", {"class": "argument"}).text
+            elif "Технічний стан" in item.text:
+                result["car_condition"] = item.find("span", {"class": "argument"}).text
+    return result
+
+
+
+
 class CSVWriter:
     def __init__(self, filename, headers):
         self.filename = filename
@@ -90,7 +117,13 @@ def main() -> None:
 
             unique_cars.add(car_id)
 
-            data = [car_id, car_manufacturer, car_model, car_year, car_modification, link_to_page]
+            data = [
+                car_id,
+                car_manufacturer,
+                car_model, car_year,
+                car_modification,
+                link_to_page
+            ]
 
             for writer in writers:
                 writer.write(data)
@@ -100,4 +133,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     # main()
-    print(get_card_detailed_page('/auto_porsche_cayenne_35113189.html'))
+    detailed_page = get_card_detailed_page('/auto_porsche_cayenne_35113189.html')
+    get_car_detailed_data(detailed_page)
