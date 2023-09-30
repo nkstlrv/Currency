@@ -4,6 +4,7 @@ import random
 import csv
 import requests
 from bs4 import BeautifulSoup
+from db_handler import SQLiteWriter
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -42,24 +43,31 @@ def get_car_detailed_data(page_html: str) -> dict:
     result = dict()
     soup = BeautifulSoup(page_html, "html.parser")
 
-    result["car_price"] = soup.find("div", {"class", "price_value"}).find("strong").text
-    result["car_description"] = soup.find("div", {"class", "full-description"}).text
+    price_div = soup.find("div", {"class": "price_value"})
 
-    additional_data = soup.find("div", {"class", "box-panel description-car"}).find_all("dd")
-    for item in additional_data:
-        if item.find("span") is not None:
-            if "Пробіг" in item.text:
-                result["car_run"] = item.find("span", {"class": "argument"}).text
-            elif "Двигун" in item.text:
-                result["car_engine"] = item.find("span", {"class": "argument"}).text
-            elif "Колір" in item.text:
-                result["car_color"] = item.find("span", {"class": "argument"}).text
-            elif "Привід" in item.text:
-                result["car_drive"] = item.find("span", {"class": "argument"}).text
-            elif "Коробка передач" in item.text:
-                result["car_gearbox"] = item.find("span", {"class": "argument"}).text
-            elif "Технічний стан" in item.text:
-                result["car_condition"] = item.find("span", {"class": "argument"}).text
+    if price_div is not None:
+        result["car_price"] = price_div.text
+
+    additional_data = soup.find("div", {"class", "box-panel description-car"})
+
+    if additional_data is not None:
+        data_fields = additional_data.find_all("dd")
+        for item in data_fields:
+            print(item)
+            if item.find("span") is not None:
+                if "Пробіг" in item.text:
+                    result["car_run"] = item.find("span", {"class": "argument"}).text
+                elif "Двигун" in item.text:
+                    result["car_engine"] = item.find("span", {"class": "argument"}).text
+                elif "Колір" in item.text:
+                    result["car_color"] = item.find("span", {"class": "argument"}).text
+                elif "Привід" in item.text:
+                    result["car_drive"] = item.find("span", {"class": "argument"}).text
+                elif "Коробка передач" in item.text:
+                    result["car_gearbox"] = item.find("span", {"class": "argument"}).text
+                elif "Технічний стан" in item.text:
+                    result["car_condition"] = item.find("span", {"class": "argument"}).text
+
     return result
 
 
@@ -101,7 +109,6 @@ def main() -> None:
         "Color",
         "Condition",
         "Drive Type",
-        "Full Description"
     ]
 
     writers = (
@@ -136,12 +143,21 @@ def main() -> None:
             detailed_page_html = get_card_detailed_page(link_to_page)
             car_detailed_data = get_car_detailed_data(detailed_page_html)
 
+            print(car_detailed_data)
+
             data = [
                 car_id,
                 car_manufacturer,
                 car_model, car_year,
                 car_modification,
-                link_to_page
+                link_to_page,
+                car_detailed_data.get("car_price"),
+                car_detailed_data.get("car_run"),
+                car_detailed_data.get("car_engine"),
+                car_detailed_data.get("car_gearbox"),
+                car_detailed_data.get("car_color"),
+                car_detailed_data.get("car_condition"),
+                car_detailed_data.get("car_drive"),
             ]
 
             unique_cars.add(car_id)
@@ -155,3 +171,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    # get_car_detailed_data(get_card_detailed_page("/auto_porsche_cayenne_coupe_35084792.html"))
