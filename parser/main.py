@@ -7,13 +7,13 @@ BASE_URL = "https://auto.ria.com/uk/search/"
 def get_page(url: str) -> str:
     query_parameters = {
         "indexName": "auto,order_auto,newauto_search",
-        "categories.main.id": 1,
-        "brand.id[0]": 59,
-        "country.import.usa.not": -1,
-        "price.currency": 1,
-        "abroad.not": 0,
-        "custom.not": 1,
-        "page=0&size": 100,
+        "categories.main.id": "1",
+        "brand.id[0]": "59",
+        "country.import.usa.not": "-1",
+        "price.currency": "1",
+        "abroad.not": "0",
+        "custom.not": "1",
+        "page=0&size": "100",
     }
 
     response = requests.get(url=url, params=query_parameters)
