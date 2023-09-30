@@ -1,94 +1,14 @@
 import logging
 import time
 import random
-import csv
-import requests
 from bs4 import BeautifulSoup
 from db_handler import SQLiteWriter
+from parser.utils import CSVWriter, StdOutWriter, get_page, get_card_detailed_page, get_car_detailed_data
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-
-
 BASE_URL = "https://auto.ria.com/uk/search/"
-
-
-def get_page(url: str, page: int, page_size: int = 100) -> str:
-    query_parameters = {
-        "indexName": "auto,order_auto,newauto_search",
-        "categories.main.id": "1",
-        "brand.id[0]": "59",
-        "country.import.usa.not": "-1",
-        "price.currency": "1",
-        "abroad.not": "0",
-        "custom.not": "1",
-        "page": str(page),
-        "size": str(page_size),
-    }
-
-    response = requests.get(url=url, params=query_parameters)
-    response.raise_for_status()
-    page_html = response.text
-    return page_html
-
-
-def get_card_detailed_page(car_url: str) -> str:
-    response = requests.get(f"https://auto.ria.com/uk{car_url}")
-    response.raise_for_status()
-    return response.text
-
-
-def get_car_detailed_data(page_html: str) -> dict:
-    result = dict()
-    soup = BeautifulSoup(page_html, "html.parser")
-
-    price_div = soup.find("div", {"class": "price_value"})
-
-    if price_div is not None:
-        result["car_price"] = price_div.text
-
-    additional_data = soup.find("div", {"class", "box-panel description-car"})
-
-    if additional_data is not None:
-        data_fields = additional_data.find_all("dd")
-        for item in data_fields:
-            print(item)
-            if item.find("span") is not None:
-                if "Пробіг" in item.text:
-                    result["car_run"] = item.find("span", {"class": "argument"}).text
-                elif "Двигун" in item.text:
-                    result["car_engine"] = item.find("span", {"class": "argument"}).text
-                elif "Колір" in item.text:
-                    result["car_color"] = item.find("span", {"class": "argument"}).text
-                elif "Привід" in item.text:
-                    result["car_drive"] = item.find("span", {"class": "argument"}).text
-                elif "Коробка передач" in item.text:
-                    result["car_gearbox"] = item.find("span", {"class": "argument"}).text
-                elif "Технічний стан" in item.text:
-                    result["car_condition"] = item.find("span", {"class": "argument"}).text
-
-    return result
-
-
-class CSVWriter:
-    def __init__(self, filename, headers):
-        self.filename = filename
-
-        with open(filename, 'w', encoding='UTF8') as f:
-            writer = csv.writer(f)
-            writer.writerow(headers)
-
-    def write(self, data):
-        with open(self.filename, 'a', encoding='UTF8') as f:
-            writer = csv.writer(f)
-            writer.writerow(data)
-
-
-class StdOutWriter:
-    @staticmethod
-    def write(data):
-        print(data)
 
 
 def main() -> None:
@@ -111,22 +31,25 @@ def main() -> None:
         "Drive Type",
     ]
 
+    # creating csv handlers
     writers = (
         CSVWriter('cars.csv', csv_headers),
         StdOutWriter(),
     )
 
+    # creating db handler
+    db = SQLiteWriter("cars.db")
+    db.create_table()
+
     while True:
         logging.info(f"PAGE: {current_page+1}")
-        time.sleep(random.randint(1, 3))
+        time.sleep(random.randint(3, 5))
 
         page_html = get_page(BASE_URL, page=current_page)
         soup = BeautifulSoup(page_html, "html.parser")
 
         search_content = soup.find("div", {"id": "searchResults"})
         content = search_content.find_all("section", {"class": "ticket-item"})
-
-        current_page += 1
 
         if not content:
             break
@@ -143,12 +66,11 @@ def main() -> None:
             detailed_page_html = get_card_detailed_page(link_to_page)
             car_detailed_data = get_car_detailed_data(detailed_page_html)
 
-            print(car_detailed_data)
-
             data = [
                 car_id,
                 car_manufacturer,
-                car_model, car_year,
+                car_model,
+                car_year,
                 car_modification,
                 link_to_page,
                 car_detailed_data.get("car_price"),
@@ -162,8 +84,16 @@ def main() -> None:
 
             unique_cars.add(car_id)
 
+            # writing to CSV file
             for writer in writers:
                 writer.write(data)
+            logging.info("INSERTED DATA TO CSV")
+
+            # writing to SQLite DB
+            db.insert_car(data)
+            logging.info("INSERTED DATA TO DB")
+
+            current_page += 1
 
     logging.info("PARSING COMPLETED")
     logging.info(f"PARSED {len(unique_cars)} unique cars")
@@ -171,4 +101,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    # get_car_detailed_data(get_card_detailed_page("/auto_porsche_cayenne_coupe_35084792.html"))

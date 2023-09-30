@@ -24,11 +24,11 @@ class SQLiteWriter:
             car_drive TEXT
         );
         """
-        with sqlite3.connect(self.db_name) as conn:
+        with sqlite3.connect(self.db) as conn:
             cursor = conn.cursor()
             cursor.execute(create_table_query)
 
-    def insert_car(self, data):
+    def insert_car(self, data: list):
         query = """
         INSERT INTO cars (
             car_id,
