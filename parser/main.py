@@ -27,6 +27,12 @@ def get_page(url: str, page: int, page_size: int = 100) -> str:
     return page_html
 
 
+def get_card_detailed_page(car_url: str) -> str:
+    response = requests.get(f"https://auto.ria.com/uk{car_url}")
+    response.raise_for_status()
+    return response.text
+
+
 class CSVWriter:
     def __init__(self, filename, headers):
         self.filename = filename
@@ -53,9 +59,8 @@ def main() -> None:
 
     csv_headers = ["car_id", "car_manufacturer", "car_model", "car_year", "car_modification", "link_to_page"]
     writers = (
-        CSVWriter('cars1.csv', csv_headers),
-        CSVWriter('cars2.csv', csv_headers),
-        # StdOutWriter(),
+        CSVWriter('cars.csv', csv_headers),
+        StdOutWriter(),
     )
 
     while True:
@@ -94,4 +99,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    print(get_card_detailed_page('/auto_porsche_cayenne_35113189.html'))
