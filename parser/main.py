@@ -87,7 +87,23 @@ def main() -> None:
     current_page = 0
     unique_cars = set()
 
-    csv_headers = ["car_id", "car_manufacturer", "car_model", "car_year", "car_modification", "link_to_page"]
+    csv_headers = [
+        "Car ID",
+        "Manufacturer",
+        "Model",
+        "Year",
+        "Modification",
+        "Link to Page",
+        "Price",
+        "Total Run",
+        "Engine",
+        "Gearbox",
+        "Color",
+        "Condition",
+        "Drive Type",
+        "Full Description"
+    ]
+
     writers = (
         CSVWriter('cars.csv', csv_headers),
         StdOutWriter(),
@@ -138,6 +154,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # main()
-    detailed_page = get_card_detailed_page('/auto_porsche_cayenne_35113189.html')
-    get_car_detailed_data(detailed_page)
+    main()
