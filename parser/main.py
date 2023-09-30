@@ -1,8 +1,13 @@
+import logging
 import time
 import random
 import csv
 import requests
 from bs4 import BeautifulSoup
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 
 
 BASE_URL = "https://auto.ria.com/uk/search/"
@@ -58,8 +63,6 @@ def get_car_detailed_data(page_html: str) -> dict:
     return result
 
 
-
-
 class CSVWriter:
     def __init__(self, filename, headers):
         self.filename = filename
@@ -91,9 +94,8 @@ def main() -> None:
     )
 
     while True:
+        logging.info(f"PAGE: {current_page+1}")
         time.sleep(random.randint(1, 3))
-
-        print(f"PAGE: {current_page+1}")
 
         page_html = get_page(BASE_URL, page=current_page)
         soup = BeautifulSoup(page_html, "html.parser")
@@ -115,7 +117,8 @@ def main() -> None:
             car_modification = car_details["data-modification-name"]
             car_year = car_details["data-year"]
 
-            unique_cars.add(car_id)
+            detailed_page_html = get_card_detailed_page(link_to_page)
+            car_detailed_data = get_car_detailed_data(detailed_page_html)
 
             data = [
                 car_id,
@@ -125,10 +128,13 @@ def main() -> None:
                 link_to_page
             ]
 
+            unique_cars.add(car_id)
+
             for writer in writers:
                 writer.write(data)
 
-    print("PARSING COMPLETED")
+    logging.info("PARSING COMPLETED")
+    logging.info(f"PARSED {len(unique_cars)} unique cars")
 
 
 if __name__ == "__main__":
